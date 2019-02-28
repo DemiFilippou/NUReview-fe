@@ -53,7 +53,7 @@ class Login extends React.Component {
     return (
       <div className="login-form">
         <Form>
-          <Message error={!this.state.error.length} header="Error" content={this.state.error} color="red" />
+          <Message error={!this.state.error} header="Error" content={this.state.error} color="red" />
           <Form.Input
             id="email"
             type="email"
