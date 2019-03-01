@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.scss';
 import Main from '../routes.js';
+import {Button} from 'semantic-ui-react';
 
 class App extends Component {
   render() {
@@ -10,10 +11,20 @@ class App extends Component {
           <div className="logo" alt="logo">
             NUReview
           </div>
-          <Main />
+          {localStorage.nureviewtoken && (
+            <Button onClick={this.logout} className="logout">
+              Logout
+            </Button>
+          )}
         </header>
+        <Main />
       </div>
     );
+  }
+
+  logout() {
+    localStorage.removeItem('nureviewtoken');
+    window.location.reload();
   }
 }
 

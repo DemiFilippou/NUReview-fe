@@ -1,6 +1,6 @@
 import React from 'react';
 import './login.scss';
-import Api from '../../api.js';
+import LoginApi from '../../loginApi.js';
 import {Redirect, Link} from 'react-router-dom';
 import {Form, Message} from 'semantic-ui-react';
 
@@ -36,7 +36,7 @@ class Login extends React.Component {
 
     let loginSuccess;
     try {
-      loginSuccess = await Api.login({user: this.state});
+      loginSuccess = await LoginApi.login({user: this.state});
     } catch (err) {
       this.setState({error: err});
     }

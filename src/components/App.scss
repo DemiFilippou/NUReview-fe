@@ -1,4 +1,10 @@
-.logo {
-  font-size: 30px; 
-  margin: 20px;
+.App-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  .logo {
+    font-size: 30px; 
+    margin: 20px;
+  }
 }

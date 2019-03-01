@@ -1,5 +1,5 @@
 import React from 'react';
-import Api from '../../api.js';
+import LoginApi from '../../loginApi.js';
 import {Redirect, Link} from 'react-router-dom';
 import {Form, Message} from 'semantic-ui-react';
 import './register.scss';
@@ -44,7 +44,7 @@ class Register extends React.Component {
     let registerSucess;
 
     try {
-      registerSucess = await Api.register({user: this.state});
+      registerSucess = await LoginApi.register({user: this.state});
     } catch (err) {
       this.setState({errors: err});
     }
