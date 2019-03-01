@@ -1,9 +1,9 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
-import searchReducer from '../reducers/searchReducer';
+import {createStore, compose, applyMiddleware} from 'redux';
+import reducer from '../reducers/';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(combineReducers({search: searchReducer}), composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;

@@ -1,29 +1,41 @@
 import {SEARCH_COMPANY_BEGIN, SEARCH_COMPANY_SUCCESS, SEARCH_COMPANY_FAIL, SET_COMPANY_CHOSEN} from '../actions';
 
-let initialState = {isLoading: false, companies: []};
+let initialState = {search: {isLoading: false, companies: []}};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_COMPANY_BEGIN:
       return {
         ...state,
-        isLoading: true
+        search: {
+          ...state.search,
+          isLoading: true
+        }
       };
     case SEARCH_COMPANY_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        companies: action.payload
+        search: {
+          ...state.search,
+          isLoading: false,
+          companies: action.payload
+        }
       };
     case SEARCH_COMPANY_FAIL:
       return {
         ...state,
-        isLoading: false
+        search: {
+          ...state.search,
+          isLoading: false
+        }
       };
     case SET_COMPANY_CHOSEN:
       return {
         ...state,
-        companyChosen: action.company
+        search: {
+          ...state.search,
+          companyChosen: action.company
+        }
       };
     default:
       return state;
