@@ -1,7 +1,7 @@
 import React from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {Search} from 'semantic-ui-react';
-import './company_search.scss';
+import './companySearch.scss';
 import _ from 'lodash';
 
 class CompanySearch extends React.Component {
@@ -9,7 +9,8 @@ class CompanySearch extends React.Component {
     super(props);
 
     this.state = {
-      query: ''
+      query: '',
+      redirect: false
     };
 
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -17,7 +18,9 @@ class CompanySearch extends React.Component {
   }
 
   handleResultSelect(e, {result}) {
+    // TODO: Redirect
     this.props.setCompanyChosen({name: result.title, id: result.id});
+    this.setState({redirect: true});
   }
 
   handleSearchChange(e, {value}) {
@@ -29,6 +32,11 @@ class CompanySearch extends React.Component {
   }
 
   render() {
+    // this is a bit of a hack until we get around to custom rendering
+    // of the search results, which can then be a list of links.
+    if (this.state.redirect) {
+      return <Redirect to={`/company/${this.props.companyChosen.id}`} />;
+    }
     const companies = this.props.companies.map((c) => ({title: c.name, id: c.id}));
     return (
       <Search

@@ -1,6 +1,13 @@
-import {SEARCH_COMPANY_BEGIN, SEARCH_COMPANY_SUCCESS, SEARCH_COMPANY_FAIL, SET_COMPANY_CHOSEN} from '../actions';
+import {
+  SEARCH_COMPANY_BEGIN,
+  SEARCH_COMPANY_SUCCESS,
+  SEARCH_COMPANY_FAIL,
+  SET_COMPANY_CHOSEN,
+  GET_COMPANY_BEGIN,
+  GET_COMPANY_SUCCESS
+} from '../actions';
 
-let initialState = {search: {isLoading: false, companies: []}};
+let initialState = {search: {isLoading: false, companies: []}, company: {}};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -36,6 +43,11 @@ const reducer = (state = initialState, action) => {
           ...state.search,
           companyChosen: action.company
         }
+      };
+    case GET_COMPANY_SUCCESS:
+      return {
+        ...state,
+        company: action.payload
       };
     default:
       return state;
