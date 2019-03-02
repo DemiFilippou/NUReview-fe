@@ -1,13 +1,21 @@
 .company {
-  .company-header {
-    display: flex;
-    .company-name {
-       
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .company-content {
+    width: 75%;
+    .company-header {
+      display: flex;
+      justify-content: space-between;
+      .company-name {
+         
+      }
     }
-  }
-  .company-reviews {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    .company-reviews {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
   }
 }

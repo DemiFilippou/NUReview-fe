@@ -21,7 +21,9 @@ class Company extends React.Component {
             <h1 className="company-name">{name}</h1>
             <Button className="add-review">Add a review</Button>
           </header>
-          <div className="company-reviews">{reviews && reviews.map((review) => <ReviewCard review={review} />)}</div>
+          <div className="company-reviews">
+            {reviews && reviews.map((review) => <ReviewCard review={review} key={review.id} />)}
+          </div>
         </div>
       </div>
     );
