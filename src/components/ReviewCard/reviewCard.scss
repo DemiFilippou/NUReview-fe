@@ -1,0 +1,13 @@
+.review-card {
+  display: flex;
+  background: rgb(255, 255, 255);
+  box-shadow: rgb(170, 170, 170) 0px 8px 32px;
+  padding: 15px;
+  margin: 10px;
+  width: 75%;
+
+  .image {
+    margin-right: 20px;
+  }
+}
+
