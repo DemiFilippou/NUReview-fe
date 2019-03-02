@@ -25,7 +25,7 @@ export default class LoginApi {
       const resJson = await res.json();
       if (res.ok) {
         localStorage.setItem('nureviewtoken', resJson.token);
-        api.defaults.headers.common['Authorization'] = resJson.token;
+        api.defaults.headers['Authorization'] = resJson.token;
         return resolve(true);
       }
       return reject(resJson.message);
@@ -51,7 +51,8 @@ export default class LoginApi {
 
       const resJson = await res.json();
       if (res.ok) {
-        api.defaults.headers.common['Authorization'] = resJson.token;
+        api.defaults.headers['Authorization'] = resJson.token;
+        localStorage.setItem('nureviewtoken', resJson.token);
         return resolve(true);
       }
       return reject(resJson.message);
