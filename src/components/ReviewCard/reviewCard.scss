@@ -35,16 +35,15 @@
 
     .overall-score {
       display: flex;
-      flex: 1;
+      flex: 1 4 15%;
       align-items: center;
       justify-content: center;
     }
 
     .review-ratings {
       display: flex;
-      flex: 4;
+      flex: 4 1 85%;
       flex-direction: column;
-      width: 100%;
       align-items: center;
 
       .review-rating {

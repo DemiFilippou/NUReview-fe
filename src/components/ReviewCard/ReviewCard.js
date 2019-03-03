@@ -81,7 +81,9 @@ class ReviewCard extends React.Component {
         </div>
         <div className="review-body">{review.body}</div>
         Tags:
-        <div className="review-tags">{review.tags && review.tags.map((tag) => this.renderTag(tag))}</div>
+        <div className="review-tags">
+          {review.tags && review.tags.length ? review.tags.map((tag) => this.renderTag(tag)) : 'None'}
+        </div>
       </div>
     );
   }
