@@ -1,13 +1,73 @@
+$light-red: #f2cdd0;
+
 .review-card {
   display: flex;
+  flex-direction: column;
   background: rgb(255, 255, 255);
   box-shadow: rgb(170, 170, 170) 0px 8px 32px;
-  padding: 15px;
-  margin: 10px;
+  padding: 1em;
+  margin: 0.7em;
   width: 100%;
 
-  .image {
-    margin-right: 20px;
+  i {
+    font-size: 10em;
+    color: gray;
+  }
+  
+  .header {
+    width: 100%;
+    margin-bottom: 1em;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      
+      &:first-child {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .review-ratings-wrapper {
+    display: flex;
+
+    .overall-score {
+      display: flex;
+      align-items: center;
+      padding: 3em;
+    }
+
+    .review-ratings {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+
+      .review-rating {
+        width: 85%;
+        margin-bottom: 3em;
+
+        .question {
+          margin-bottom: 10px;
+        }
+      }  
+    }
+  }
+
+  .review-tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .tag {
+      background-color: $light-red;
+      padding: 0.5em;
+      margin: .25em;
+      border-radius: .25em;
+    }
+  }
+
+  .review-body {
+    padding: 2em;
   }
 }
-

@@ -1,15 +1,17 @@
 import React from 'react';
 import './reviewCard.scss';
-import {Item} from 'semantic-ui-react';
+import './sliderOverrides.scss';
 import classNames from 'classnames';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class ReviewCard extends React.Component {
   constructor(props) {
     super(props);
-    this.getIcon = this.getIcon.bind(this);
+    this.renderIcon = this.renderIcon.bind(this);
   }
 
-  getIcon() {
+  renderIcon() {
     const {review} = this.props;
     const average = (review.enjoyment + review.learning + review.recommend) / 3;
     let icon;
@@ -25,24 +27,65 @@ class ReviewCard extends React.Component {
         icon = 'fa-frown';
     }
 
-    return icon;
-    //return <i class={icon} />;
+    return (
+      <div className="overall-score">
+        <i className={classNames(icon, 'fas')} />
+      </div>
+    );
+  }
+
+  renderTag(tag) {
+    return <div className="tag">{tag.tag}</div>;
   }
 
   render() {
     const {review} = this.props;
+    const sliderProps = {
+      min: 1,
+      max: 10,
+      marks: {
+        1: {label: 'Strongly\nDisagree'},
+        5: {label: 'Neutral'},
+        10: {label: 'Strongly Agree'}
+      }
+    };
 
     return (
-      <Item className="review-card">
-        <Item.Image as="i" size="tiny" className={classNames(this.getIcon(), 'fas')} />
-        <Item.Content>
-          <Item.Header> {review.position}</Item.Header>
-          <Item.Header> {`${review.semester} ${review.year}`}</Item.Header>
-          <Item.Meta />
-          <Item.Description>{review.body}</Item.Description>
-          <Item.Extra>Read More...</Item.Extra>
-        </Item.Content>
-      </Item>
+      <div className="review-card">
+        <div className="header">
+          <div className="row">
+            <span> {review.position} </span>
+            <span> {`${review.semester} ${review.year}`}</span>
+          </div>
+          <div className="row">
+            <span> {review.anonymous ? '' : review.user && review.user.name}</span>
+            <span> {review.hourly_rate ? `$${review.hourly_rate}/hour` : ''}</span>
+          </div>
+        </div>
+        <div className="review-ratings-wrapper">
+          {this.renderIcon()}
+          <div className="review-ratings">
+            <div className="review-rating">
+              <div className="question"> I enjoyed this co-op </div>
+              <Slider className="disabled" {...sliderProps} value={review.enjoyment} />
+            </div>
+            <div className="review-rating">
+              <div className="question"> I learned a lot on this co-op </div>
+              <Slider className="disabled" {...sliderProps} value={review.learning} />
+            </div>{' '}
+            <div className="review-rating">
+              <div className="question"> I would recommend this co-op to a friend </div>
+              <Slider className="disabled" {...sliderProps} value={review.recommend} />
+            </div>
+          </div>
+        </div>
+        Tags:
+        <div className="review-tags">{review.tags && review.tags.map((tag) => this.renderTag(tag))}</div>
+        <div className="review-body">
+          <div>{review.body}</div>
+          <div>Read More...</div>
+        </div>
+      </div>
     );
   }
 }

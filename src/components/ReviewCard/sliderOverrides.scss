@@ -1,0 +1,44 @@
+.rc-slider.disabled {
+  &:focus, &:hover {
+    cursor: default;
+  }
+
+  .rc-slider-step {
+    .rc-slider-dot {
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+
+  .rc-slider-handle {
+    cursor: default;
+
+    &:focus {
+      cursor: default;
+      box-shadow: none;
+      border-color: #96dbfa;
+    }
+    &:hover {
+      cursor: default;
+      border-color: #96dbfa;
+    }
+  }
+
+  .rc-slider-mark {
+    cursor: default;
+
+    &:hover {
+      cursor: default;
+    }
+
+    .rc-slider-mark-text {
+      width: 100%;
+
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+}
+
