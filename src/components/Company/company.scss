@@ -1,4 +1,6 @@
-.company {
+ @import "src/sass-variables";
+ 
+ .company {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,8 +11,13 @@
     .company-header {
       display: flex;
       justify-content: space-between;
-      padding-top: 20px;
-
+      padding-top: 1.25em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      button {
+        color: white;
+        background-color: $gray;
+      }
       .company-name {
          
       }
@@ -19,7 +26,6 @@
       display: flex;
       align-items: center;
       flex-direction: column;
-      border-radius: 50px;
     }
   }
 }

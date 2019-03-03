@@ -1,19 +1,22 @@
 @import "src/sass-variables";
-
 .rc-slider {
   .rc-slider-track {
     background-color: $light-red;
   }
 
   .rc-slider-dot {
-    border-color: $gray 
+    border-color: $medium-gray 
   }
 
   .rc-slider-handle {
-    border-color: $gray;
+    border-color: $medium-gray;
   }
 
-  .disabled {
+  .rc-slider-mark-text {
+    white-space: pre-line;
+  }
+
+  &.disabled {
     &:focus, &:hover {
       cursor: default;
     }
@@ -29,14 +32,10 @@
     .rc-slider-handle {
       cursor: default;
 
-      &:focus {
+      &:focus, &:hover {
         cursor: default;
         box-shadow: none;
-        border-color: #96dbfa;
-      }
-      &:hover {
-        cursor: default;
-        border-color: #96dbfa;
+        border-color: $medium-gray;
       }
     }
 
