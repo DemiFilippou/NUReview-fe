@@ -1,13 +1,14 @@
-$light-red: #f2cdd0;
+@import "src/sass-variables";
 
 .review-card {
   display: flex;
   flex-direction: column;
-  background: rgb(255, 255, 255);
+  background: white;
   box-shadow: rgb(170, 170, 170) 0px 8px 32px;
-  padding: 1em;
   margin: 0.7em;
   width: 100%;
+  padding: 4em;
+  border-radius: 4em;
 
   i {
     font-size: 10em;
@@ -30,15 +31,18 @@ $light-red: #f2cdd0;
 
   .review-ratings-wrapper {
     display: flex;
+    flex-wrap: wrap;
 
     .overall-score {
       display: flex;
+      flex: 1;
       align-items: center;
-      padding: 3em;
+      justify-content: center;
     }
 
     .review-ratings {
       display: flex;
+      flex: 4;
       flex-direction: column;
       width: 100%;
       align-items: center;
@@ -64,10 +68,15 @@ $light-red: #f2cdd0;
       padding: 0.5em;
       margin: .25em;
       border-radius: .25em;
+      text-transform: uppercase;
+      color: slategray;
+      font-weight: 700;
+      cursor: default;
     }
   }
 
   .review-body {
-    padding: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 }

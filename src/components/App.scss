@@ -1,3 +1,5 @@
+@import "src/sass-variables";
+
 body {
   height: 100%;
 
@@ -8,13 +10,17 @@ body {
 
 .App {
   height: 100%;
-  background-color: rgb(237, 237, 241);
+  background-color: $light-gray; 
 
   .App-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+    box-shadow: #bbbbbb 0px 6px 20px 0px;
+    padding: 10px;
+    background-color: #d0626b;
+    color: white;
+
     .logo {
       font-size: 30px; 
       margin: 20px;

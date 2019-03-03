@@ -1,42 +1,58 @@
-.rc-slider.disabled {
-  &:focus, &:hover {
-    cursor: default;
+@import "src/sass-variables";
+
+.rc-slider {
+  .rc-slider-track {
+    background-color: $light-red;
   }
 
-  .rc-slider-step {
-    .rc-slider-dot {
-      &:hover {
-        cursor: default;
-      }
-    }
+  .rc-slider-dot {
+    border-color: $gray 
   }
 
   .rc-slider-handle {
-    cursor: default;
-
-    &:focus {
-      cursor: default;
-      box-shadow: none;
-      border-color: #96dbfa;
-    }
-    &:hover {
-      cursor: default;
-      border-color: #96dbfa;
-    }
+    border-color: $gray;
   }
 
-  .rc-slider-mark {
-    cursor: default;
-
-    &:hover {
+  .disabled {
+    &:focus, &:hover {
       cursor: default;
     }
 
-    .rc-slider-mark-text {
-      width: 100%;
+    .rc-slider-step {
+      .rc-slider-dot {
+        &:hover {
+          cursor: default;
+        }
+      }
+    }
+
+    .rc-slider-handle {
+      cursor: default;
+
+      &:focus {
+        cursor: default;
+        box-shadow: none;
+        border-color: #96dbfa;
+      }
+      &:hover {
+        cursor: default;
+        border-color: #96dbfa;
+      }
+    }
+
+    .rc-slider-mark {
+      cursor: default;
 
       &:hover {
         cursor: default;
+      }
+
+      .rc-slider-mark-text {
+        width: 100%;
+
+        &:hover {
+          cursor: default;
+        }
       }
     }
   }
