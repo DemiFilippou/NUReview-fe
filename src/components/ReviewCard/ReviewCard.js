@@ -35,7 +35,11 @@ class ReviewCard extends React.Component {
   }
 
   renderTag(tag) {
-    return <div className="tag">{tag.tag}</div>;
+    return (
+      <div className="tag" key={tag.id}>
+        {tag.tag}
+      </div>
+    );
   }
 
   render() {
@@ -54,7 +58,7 @@ class ReviewCard extends React.Component {
       <div className="review-card">
         <div className="header">
           <div className="row">
-            <span> {review.position} </span>
+            <span> {review.position.title} </span>
             <span> {`${review.semester} ${review.year}`}</span>
           </div>
           <div className="row">
