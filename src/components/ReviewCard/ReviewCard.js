@@ -1,6 +1,5 @@
 import React from 'react';
 import './reviewCard.scss';
-import './sliderOverrides.scss';
 import classNames from 'classnames';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';

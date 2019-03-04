@@ -3,11 +3,36 @@ import {
   SEARCH_COMPANY_SUCCESS,
   SEARCH_COMPANY_FAIL,
   SET_COMPANY_CHOSEN,
-  GET_COMPANY_BEGIN,
-  GET_COMPANY_SUCCESS
+  GET_COMPANY_SUCCESS,
+  GET_POSITIONS_SUCCESS,
+  ADD_POSITION_SUCCESS,
+  ENTER_POSITION,
+  ENTER_SEMESTER,
+  ENTER_YEAR,
+  TOGGLE_ANONYMOUS,
+  ENTER_WAGE,
+  ENTER_ENJOYMENT,
+  ENTER_LEARNING,
+  ENTER_RECOMMEND,
+  ENTER_BODY,
+  SELECT_TAG
 } from '../actions';
 
-let initialState = {search: {isLoading: false, companies: []}, company: {}};
+let initialState = {
+  search: {isLoading: false, companies: []},
+  company: {},
+  positions: [],
+  newReview: {
+    positionId: '',
+    semester: '',
+    year: '',
+    anonymous: false,
+    wage: '',
+    enjoyment: 1,
+    learning: 1,
+    recommend: 1
+  }
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -49,6 +74,62 @@ const reducer = (state = initialState, action) => {
         ...state,
         company: action.payload
       };
+    case GET_POSITIONS_SUCCESS:
+      return {
+        ...state,
+        positions: action.payload
+      };
+    case ADD_POSITION_SUCCESS:
+      return {
+        ...state,
+        positions: [action.payload, ...state.positions]
+      };
+    case ENTER_POSITION:
+      return {
+        ...state,
+        newReview: {...state.newReview, positionId: action.positionId}
+      };
+    case ENTER_SEMESTER:
+      return {
+        ...state,
+        newReview: {...state.newReview, semester: action.semester}
+      };
+    case ENTER_YEAR:
+      return {
+        ...state,
+        newReview: {...state.newReview, year: action.year}
+      };
+    case ENTER_WAGE:
+      return {
+        ...state,
+        newReview: {...state.newReview, wage: action.wage}
+      };
+    case TOGGLE_ANONYMOUS:
+      return {
+        ...state,
+        newReview: {...state.newReview, anonymous: !state.newReview.anonymous}
+      };
+    case ENTER_ENJOYMENT:
+      return {
+        ...state,
+        newReview: {...state.newReview, enjoyment: action.enjoyment}
+      };
+    case ENTER_LEARNING:
+      return {
+        ...state,
+        newReview: {...state.newReview, learning: action.learning}
+      };
+    case ENTER_RECOMMEND:
+      return {
+        ...state,
+        newReview: {...state.newReview, recommend: action.recommend}
+      };
+    case ENTER_BODY:
+      return {
+        ...state,
+        newReview: {...state.newReview, body: action.body}
+      };
+    case SELECT_TAG:
     default:
       return state;
   }

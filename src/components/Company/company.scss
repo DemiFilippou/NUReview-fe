@@ -1,6 +1,6 @@
- @import "src/sass-variables";
- 
- .company {
+@import 'src/sass-variables';
+
+.company {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,9 +17,16 @@
       button {
         color: white;
         background-color: $gray;
+        border: 2px solid transparent;
+
+        &:hover {
+          background-color: white;
+          color: $red;
+          border: 2px solid $red;
+          box-shadow: $shadow-gray -1px 3px 32px;
+        }
       }
       .company-name {
-         
       }
     }
     .company-reviews {

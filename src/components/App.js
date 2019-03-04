@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.scss';
+import './sliderOverrides.scss';
 import Main from '../routes.js';
 import {Button} from 'semantic-ui-react';
 

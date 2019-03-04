@@ -1,10 +1,10 @@
-@import "src/sass-variables";
+@import 'src/sass-variables';
 
 .review-card {
   display: flex;
   flex-direction: column;
   background: white;
-  box-shadow: rgb(170, 170, 170) 0px 8px 32px;
+  box-shadow: $shadow-gray 0px 8px 32px;
   margin: 0.7em;
   width: 100%;
   padding: 3em;
@@ -14,7 +14,7 @@
     font-size: 10em;
     color: $gray;
   }
-  
+
   .header {
     width: 100%;
     margin-bottom: 1em;
@@ -22,7 +22,7 @@
     .row {
       display: flex;
       justify-content: space-between;
-      
+
       &:first-child {
         font-weight: 600;
       }
@@ -53,7 +53,7 @@
         .question {
           margin-bottom: 10px;
         }
-      }  
+      }
     }
   }
 
@@ -65,8 +65,8 @@
     .tag {
       background-color: $light-red;
       padding: 0.5em;
-      margin: .25em;
-      border-radius: .25em;
+      margin: 0.25em;
+      border-radius: 0.25em;
       text-transform: uppercase;
       color: slategray;
       font-weight: 700;

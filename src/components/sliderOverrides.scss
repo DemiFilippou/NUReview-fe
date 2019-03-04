@@ -1,11 +1,11 @@
-@import "src/sass-variables";
+@import 'src/sass-variables';
 .rc-slider {
   .rc-slider-track {
     background-color: $light-red;
   }
 
   .rc-slider-dot {
-    border-color: $medium-gray 
+    border-color: $medium-gray;
   }
 
   .rc-slider-handle {
@@ -17,7 +17,8 @@
   }
 
   &.disabled {
-    &:focus, &:hover {
+    &:focus,
+    &:hover {
       cursor: default;
     }
 
@@ -32,7 +33,8 @@
     .rc-slider-handle {
       cursor: default;
 
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         cursor: default;
         box-shadow: none;
         border-color: $medium-gray;
@@ -54,4 +56,3 @@
     }
   }
 }
-

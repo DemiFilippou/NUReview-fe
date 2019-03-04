@@ -1,7 +1,7 @@
-@import "src/sass-variables";
+@import 'src/sass-variables';
 
 body {
-  background-color: $light-gray; 
+  background-color: $light-gray;
 }
 
 .App {
@@ -11,17 +11,28 @@ body {
     justify-content: space-between;
     box-shadow: #bbbbbb 0px 6px 20px 0px;
     padding: 0.5em;
-    background-color: #d0626b;
+    background-color: $red;
     color: white;
 
     .logo {
-      font-size: 2em; 
+      font-size: 2em;
       margin: 0.5em;
     }
 
     .logout {
       background: none;
       color: white;
-    } 
+
+      &:hover {
+        color: $light-gray;
+      }
+    }
+  }
+
+  a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
   }
 }

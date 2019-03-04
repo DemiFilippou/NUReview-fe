@@ -1,0 +1,57 @@
+@import 'src/sass-variables';
+
+.modal.review-form {
+  .header {
+    background-color: $light-red;
+  }
+
+  .content {
+    padding: 2em;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .label {
+      height: fit-content;
+      align-self: center;
+    }
+
+    .field {
+      margin-right: 2em;
+      &.anonymous {
+        align-self: center;
+      }
+      &.position,
+      &.semester {
+        flex-basis: 15em;
+      }
+      &.year {
+        width: 10em;
+      }
+
+      &.wage {
+        margin-right: 0;
+        width: 7em;
+      }
+    }
+  }
+  .slider-group {
+    white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .rating {
+      width: 100%;
+      padding-top: 1em;
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-bottom: 1em;
+
+      .rc-slider {
+        padding-bottom: 4em;
+      }
+    }
+  }
+}
