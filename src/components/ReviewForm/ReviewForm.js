@@ -81,14 +81,17 @@ class ReviewForm extends React.Component {
                 <YearDropdownContainer />
               </Form.Field>
               <Form.Input
-                className="wage"
-                label="Hourly Wage"
+                label="Wage"
+                labelPosition="right"
                 type="number"
-                icon="dollar"
-                iconPosition="left"
+                className="wage"
                 value={newReview.wage}
                 onChange={this.handleWageChange}
-              />
+              >
+                <input />
+                <Label>/hr</Label>
+              </Form.Input>
+
               {this.state.errors.wage && <Label pointing="left">{this.state.errors.wage}</Label>}
             </div>
             <Form.Field required>

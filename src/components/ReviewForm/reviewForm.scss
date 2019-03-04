@@ -32,7 +32,12 @@
 
       &.wage {
         margin-right: 0;
-        width: 7em;
+        .label {
+          border: 1px solid lightgray;
+        }
+        input {
+          width: 5em;
+        }
       }
     }
   }
