@@ -1,8 +1,8 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-import {Search} from 'semantic-ui-react';
+import {Search, Header} from 'semantic-ui-react';
 import './companySearch.scss';
-import _ from 'lodash';
+import {debounce} from 'lodash';
 
 class CompanySearch extends React.Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class CompanySearch extends React.Component {
   }
 
   handleResultSelect(e, {result}) {
-    // TODO: Redirect
     this.props.setCompanyChosen({name: result.title, id: result.id});
     this.setState({redirect: true});
   }
@@ -39,14 +38,19 @@ class CompanySearch extends React.Component {
     }
     const companies = this.props.companies.map((c) => ({title: c.name, id: c.id}));
     return (
-      <Search
-        loading={this.props.isLoading}
-        onResultSelect={this.handleResultSelect}
-        onSearchChange={_.debounce(this.handleSearchChange, 500, {leading: true})}
-        results={companies}
-        value={(this.props.companyChosen && this.props.companyChosen.name) || this.state.query}
-        {...this.props}
-      />
+      <div className="search-wrapper">
+        <Header>Search for a Company</Header>
+        <Search
+          className="company-search-bar"
+          placeholder="Company Name"
+          loading={this.props.isLoading}
+          onResultSelect={this.handleResultSelect}
+          onSearchChange={debounce(this.handleSearchChange, 500, {leading: true})}
+          results={companies}
+          value={(this.props.companyChosen && this.props.companyChosen.name) || this.state.query}
+          {...this.props}
+        />
+      </div>
     );
   }
 }

@@ -6,7 +6,8 @@ const newReviewTemplate = {
   wage: '',
   enjoyment: 1,
   learning: 1,
-  recommend: 1
+  recommend: 1,
+  tagIds: []
 };
 
 export default newReviewTemplate;

@@ -64,11 +64,9 @@
 
     .tag {
       background-color: $light-red;
-      padding: 0.5em;
-      margin: 0.25em;
-      border-radius: 0.25em;
+      margin-bottom: 0.5em;
       text-transform: uppercase;
-      color: slategray;
+      color: $semantic-dark-gray;
       font-weight: 700;
       cursor: default;
     }

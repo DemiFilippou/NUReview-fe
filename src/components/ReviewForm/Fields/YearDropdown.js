@@ -8,12 +8,12 @@ class YearDropdown extends Component {
   handleChange = (e, {value}) => this.props.enterYear(value);
 
   render() {
-    let yearStart = 2000;
-    const yearEnd = new Date().getFullYear();
-    // make a list of empty values and fill them with the years 2000 to this year
+    const yearStart = 2000;
+    let yearEnd = new Date().getFullYear();
+    // make a list of empty values and fill them with this year to 2000
     let years = Array(yearEnd - yearStart + 1)
       .fill()
-      .map(() => ({key: yearStart, text: yearStart, value: yearStart++}));
+      .map(() => ({key: yearEnd, text: yearEnd, value: yearEnd--}));
 
     return (
       <Dropdown

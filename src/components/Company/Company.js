@@ -11,7 +11,7 @@ class Company extends React.Component {
   }
 
   renderReviewForm() {
-    return <ReviewFormContainer company={this.props.company} />;
+    return <ReviewFormContainer companyId={this.props.company.id} companyName={this.props.company.name} />;
   }
 
   render() {

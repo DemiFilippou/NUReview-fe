@@ -3,6 +3,7 @@ import './reviewCard.scss';
 import classNames from 'classnames';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import {Label} from 'semantic-ui-react';
 
 class ReviewCard extends React.Component {
   constructor(props) {
@@ -35,9 +36,9 @@ class ReviewCard extends React.Component {
 
   renderTag(tag) {
     return (
-      <div className="tag" key={tag.id}>
+      <Label className="tag" key={tag.id}>
         {tag.tag}
-      </div>
+      </Label>
     );
   }
 
@@ -75,7 +76,7 @@ class ReviewCard extends React.Component {
             <div className="review-rating">
               <div className="question"> I learned a lot on this co-op </div>
               <Slider className="disabled" {...sliderProps} value={review.learning} />
-            </div>{' '}
+            </div>
             <div className="review-rating">
               <div className="question"> I would recommend this co-op to a friend </div>
               <Slider className="disabled" {...sliderProps} value={review.recommend} />
@@ -83,7 +84,7 @@ class ReviewCard extends React.Component {
           </div>
         </div>
         <div className="review-body">{review.body}</div>
-        Tags:
+        <label>Tags:</label>
         <div className="review-tags">
           {review.tags && review.tags.length ? review.tags.map((tag) => this.renderTag(tag)) : 'None'}
         </div>

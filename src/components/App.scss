@@ -2,6 +2,29 @@
 
 body {
   background-color: $light-gray;
+
+  .dismissable-popup {
+    display: flex; // so the 'x' button wont wrap to the next line
+
+    .popup-dismiss-btn {
+      padding-right: 0;
+      background: none;
+      border: none;
+      color: $gray;
+
+      &:hover,
+      &:focus {
+        cursor: pointer;
+        color: black;
+      }
+    }
+  }
+
+  // a hack to get the confirmation modal (for abandoning a review) to show
+  // on top of error pop-ups
+  .ui.dimmer:nth-last-of-type(1) {
+    z-index: 2000;
+  }
 }
 
 .App {

@@ -1,4 +1,5 @@
 import api from '../api';
+import {snakeCase, mapKeys} from 'lodash';
 
 export const SEARCH_COMPANY_BEGIN = 'SEARCH_COMPANY_BEGIN';
 export const SEARCH_COMPANY_SUCCESS = 'SEARCH_COMPANY_SUCCESS';
@@ -10,6 +11,9 @@ export const GET_COMPANY_FAIL = 'GET_COMPANY_FAIL';
 export const GET_POSITIONS_BEGIN = 'GET_POSITIONS_BEGIN';
 export const GET_POSITIONS_SUCCESS = 'GET_POSITIONS_SUCCESS';
 export const GET_POSITIONS_FAIL = 'GET_POSITIONS_FAIL';
+export const GET_TAGS_BEGIN = 'GET_TAGS_BEGIN';
+export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS';
+export const GET_TAGS_FAIL = 'GET_TAGS_FAIL';
 export const ADD_POSITION_BEGIN = 'ADD_POSITION_BEGIN';
 export const ADD_POSITION_SUCCESS = 'ADD_POSITION_SUCCESS';
 export const ADD_POSITION_FAIL = 'ADD_POSITION_FAIL';
@@ -23,7 +27,11 @@ export const ENTER_LEARNING = 'ENTER_LEARNING';
 export const ENTER_RECOMMEND = 'ENTER_RECOMMEND';
 export const ENTER_BODY = 'ENTER_BODY';
 export const SELECT_TAG = 'SELECT_TAG';
+export const SET_COMPANY_ID = 'SET_COMPANY_ID';
 export const CLEAR_NEW_REVIEW_FORM = 'CLEAR_NEW_REVIEW_FORM';
+export const ADD_REVIEW_BEGIN = 'ADD_REVIEW_BEGIN';
+export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
+export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
 
 export const searchCompany = (query) => {
   return (dispatch) => {
@@ -116,6 +124,34 @@ export const getPositionsFail = (error) => ({
   payload: {error}
 });
 
+export const getTags = () => {
+  return (dispatch) => {
+    dispatch(getTagsBegin());
+    api
+      .get('/tags/')
+      .then((res) => {
+        dispatch(getTagsSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(getTagsFail(err.message));
+      });
+  };
+};
+
+export const getTagsBegin = () => ({
+  type: GET_TAGS_BEGIN
+});
+
+export const getTagsSuccess = (tags) => ({
+  type: GET_TAGS_SUCCESS,
+  payload: tags
+});
+
+export const getTagsFail = (error) => ({
+  type: GET_TAGS_FAIL,
+  payload: {error}
+});
+
 export const addPosition = (title) => {
   return (dispatch) => {
     dispatch(addPositionBegin(title));
@@ -191,4 +227,49 @@ export const enterRecommend = (recommend) => ({
 
 export const clearNewReviewForm = () => ({
   type: CLEAR_NEW_REVIEW_FORM
+});
+
+export const selectTag = (tagId) => ({
+  type: SELECT_TAG,
+  tagId
+});
+
+export const setCompanyId = (companyId) => ({
+  type: SET_COMPANY_ID,
+  companyId
+});
+
+export const addReview = (review) => {
+  //const userId = JSON.parse(atob(localStorage.nureviewtoken.split('.')[1])).user;
+  const reviewFormatted = {
+    review: mapKeys(review, (v, k) => {
+      return snakeCase(k);
+    })
+  };
+  return (dispatch) => {
+    dispatch(addReviewBegin(review));
+    api
+      .post('reviews', reviewFormatted)
+      .then((res) => {
+        dispatch(addReviewSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(addReviewFail(err.message));
+      });
+  };
+};
+
+export const addReviewBegin = (review) => ({
+  type: ADD_REVIEW_BEGIN,
+  position: review
+});
+
+export const addReviewSuccess = (position) => ({
+  type: ADD_REVIEW_SUCCESS,
+  payload: position
+});
+
+export const addReviewFail = (error) => ({
+  type: ADD_REVIEW_FAIL,
+  payload: {error}
 });

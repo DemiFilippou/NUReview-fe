@@ -5,6 +5,7 @@ import {
   SET_COMPANY_CHOSEN,
   GET_COMPANY_SUCCESS,
   GET_POSITIONS_SUCCESS,
+  GET_TAGS_SUCCESS,
   ADD_POSITION_SUCCESS,
   ENTER_POSITION,
   ENTER_SEMESTER,
@@ -16,14 +17,17 @@ import {
   ENTER_RECOMMEND,
   ENTER_BODY,
   SELECT_TAG,
+  SET_COMPANY_ID,
   CLEAR_NEW_REVIEW_FORM
 } from '../actions';
 import newReviewTemplate from '../newReviewTemplate';
+import {xor} from 'lodash';
 
 let initialState = {
   search: {isLoading: false, companies: []},
   company: {},
   positions: [],
+  tags: [],
   newReview: newReviewTemplate
 };
 
@@ -72,10 +76,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         positions: action.payload
       };
+    case GET_TAGS_SUCCESS:
+      return {
+        ...state,
+        tags: action.payload
+      };
+    case SELECT_TAG:
+      return {
+        ...state,
+        tags: state.tags.map((tag) => (tag.id === action.tagId ? {...tag, isSelected: !tag.isSelected} : tag)),
+        newReview: {...state.newReview, tagIds: xor(state.newReview.tagIds, [action.tagId])}
+      };
+    case SET_COMPANY_ID:
+      return {...state, newReview: {...state.newReview, companyId: action.companyId}};
     case ADD_POSITION_SUCCESS:
       return {
         ...state,
-        positions: [action.payload, ...state.positions]
+        positions: [action.payload, ...state.positions],
+        newReview: {...state.newReview, positionId: action.payload.id}
       };
     case ENTER_POSITION:
       return {

@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import ReviewForm from './ReviewForm';
 import {
   getPositions,
+  getTags,
   enterYear,
   toggleAnonymous,
   enterWage,
@@ -10,17 +11,21 @@ import {
   enterEnjoyment,
   enterLearning,
   enterRecommend,
-  clearNewReviewForm
+  selectTag,
+  setCompanyId,
+  clearNewReviewForm,
+  addReview
 } from '../../actions';
 
 const mapStateToProps = (state) => {
-  return {newReview: state.newReview};
+  return {newReview: state.newReview, tags: state.tags};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getPositions,
+      getTags,
       enterYear,
       toggleAnonymous,
       enterWage,
@@ -28,7 +33,10 @@ const mapDispatchToProps = (dispatch) => {
       enterEnjoyment,
       enterLearning,
       enterRecommend,
-      clearNewReviewForm
+      selectTag,
+      setCompanyId,
+      clearNewReviewForm,
+      addReview
     },
     dispatch
   );
