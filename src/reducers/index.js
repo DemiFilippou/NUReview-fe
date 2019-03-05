@@ -15,23 +15,16 @@ import {
   ENTER_LEARNING,
   ENTER_RECOMMEND,
   ENTER_BODY,
-  SELECT_TAG
+  SELECT_TAG,
+  CLEAR_NEW_REVIEW_FORM
 } from '../actions';
+import newReviewTemplate from '../newReviewTemplate';
 
 let initialState = {
   search: {isLoading: false, companies: []},
   company: {},
   positions: [],
-  newReview: {
-    positionId: '',
-    semester: '',
-    year: '',
-    anonymous: false,
-    wage: '',
-    enjoyment: 1,
-    learning: 1,
-    recommend: 1
-  }
+  newReview: newReviewTemplate
 };
 
 const reducer = (state = initialState, action) => {
@@ -128,6 +121,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         newReview: {...state.newReview, body: action.body}
+      };
+    case CLEAR_NEW_REVIEW_FORM:
+      return {
+        ...state,
+        newReview: newReviewTemplate
       };
     case SELECT_TAG:
     default:

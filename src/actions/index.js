@@ -23,6 +23,7 @@ export const ENTER_LEARNING = 'ENTER_LEARNING';
 export const ENTER_RECOMMEND = 'ENTER_RECOMMEND';
 export const ENTER_BODY = 'ENTER_BODY';
 export const SELECT_TAG = 'SELECT_TAG';
+export const CLEAR_NEW_REVIEW_FORM = 'CLEAR_NEW_REVIEW_FORM';
 
 export const searchCompany = (query) => {
   return (dispatch) => {
@@ -186,4 +187,8 @@ export const enterLearning = (learning) => ({
 export const enterRecommend = (recommend) => ({
   type: ENTER_RECOMMEND,
   recommend
+});
+
+export const clearNewReviewForm = () => ({
+  type: CLEAR_NEW_REVIEW_FORM
 });

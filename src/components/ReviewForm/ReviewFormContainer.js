@@ -9,7 +9,8 @@ import {
   enterBody,
   enterEnjoyment,
   enterLearning,
-  enterRecommend
+  enterRecommend,
+  clearNewReviewForm
 } from '../../actions';
 
 const mapStateToProps = (state) => {
@@ -18,7 +19,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    {getPositions, enterYear, toggleAnonymous, enterWage, enterBody, enterEnjoyment, enterLearning, enterRecommend},
+    {
+      getPositions,
+      enterYear,
+      toggleAnonymous,
+      enterWage,
+      enterBody,
+      enterEnjoyment,
+      enterLearning,
+      enterRecommend,
+      clearNewReviewForm
+    },
     dispatch
   );
 };

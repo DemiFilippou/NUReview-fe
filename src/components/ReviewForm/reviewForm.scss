@@ -7,6 +7,10 @@
 
   .content {
     padding: 2em;
+
+    &.scrolling {
+      max-height: calc(100vh - 10em);
+    }
   }
   .row {
     display: flex;
