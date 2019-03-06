@@ -21,12 +21,14 @@ class ReviewForm extends React.Component {
     };
 
     this.openModal = this.openModal.bind(this);
+    this.isFormIncomplete = this.isFormIncomplete.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.renderTags = this.renderTags.bind(this);
     this.submitReview = this.submitReview.bind(this);
     this.handleConfirmClose = this.handleConfirmClose.bind(this);
   }
 
+  // when the form is opened, we load data
   openModal() {
     this.props.getPositions();
     this.props.getTags();
@@ -34,6 +36,8 @@ class ReviewForm extends React.Component {
     this.setState({isModalOpen: true});
   }
 
+  // when the modal is closed, we check if the user has filled out anything on the form
+  // if they have, we render a confirmation modal to make sure they do not accidentally abandon their changes
   onModalClose() {
     let isFormDirty = false;
 
@@ -54,26 +58,74 @@ class ReviewForm extends React.Component {
     }
   }
 
-  renderTags() {
-    return this.props.tags.map((tag) => {
-      const classes = classNames({tag: true, selected: tag.isSelected});
-      return (
-        <Label className={classes} key={tag.id} onClick={() => this.props.selectTag(tag.id)}>
-          {tag.tag}
-        </Label>
-      );
-    });
-  }
-
+  // called when a user confirms they are closing the form
   handleConfirmClose() {
     this.props.clearNewReviewForm();
     this.setState({isCloseConfirmationOpen: false, isModalOpen: false});
   }
 
+  // called when a user cancels closing the form in order to stay on the form
   handleCancelClose = () => this.setState({isCloseConfirmationOpen: false, isModalOpen: true});
 
   submitReview() {
     this.props.addReview(this.props.newReview);
+  }
+
+  // returns true if the required fields are not all filled out
+  isFormIncomplete() {
+    // the sliders are also required, but they start with a value of 1 so
+    // they are never technically empty
+    const requiredFields = ['positionId', 'semester', 'year'];
+    let isIncomplete = false;
+
+    for (let key of requiredFields) {
+      if (this.props.newReview[key] === newReviewTemplate[key]) {
+        isIncomplete = true;
+        break;
+      }
+    }
+    return isIncomplete;
+  }
+
+  renderTags() {
+    return this.props.tags.map((tag) => {
+      const classes = classNames({tag: true, selected: tag.isSelected});
+
+      // wrap each tag in a button for accessibility purporses
+      return (
+        <Label className={classes} key={tag.id} onClick={() => this.props.selectTag(tag.id)}>
+          <button className="unstyled-btn" key={tag.id}>
+            {tag.tag}
+          </button>
+        </Label>
+      );
+    });
+  }
+
+  renderSubmitButton() {
+    // need a custom disabled class as opposed to the normal disabled class
+    // in order to be able to use the semantic pop-up on hover to explain why
+    // the button it disabled
+    if (this.isFormIncomplete()) {
+      return (
+        <Popup
+          trigger={
+            <Button type="submit" className="submit-review-btn custom-disabled">
+              Submit
+            </Button>
+          }
+          position="right center"
+          on={['hover', 'click', 'focus']}
+          content="Fill out the required fields"
+        />
+      );
+    } else {
+      return (
+        <Button type="submit" onClick={this.submitReview} className="submit-review-btn">
+          Submit
+        </Button>
+      );
+    }
   }
 
   render() {
@@ -164,9 +216,7 @@ class ReviewForm extends React.Component {
                 <label>Choose Tags</label>
               </Form.Field>
               <div className="tags">{this.renderTags()}</div>
-              <Button type="submit" onClick={this.submitReview}>
-                Submit
-              </Button>
+              {this.renderSubmitButton()}
             </Form>
           </Modal.Content>
           <Confirm

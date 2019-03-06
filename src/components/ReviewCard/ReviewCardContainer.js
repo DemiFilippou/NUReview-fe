@@ -1,14 +1,14 @@
 /*import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ReviewCard from './ReviewCard';
-import {getReviewCard} from '../../actions';
+import {downvote, upvote} from '../../actions';
 
 const mapStateToProps = (state) => {
   return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({downvote, upvote}, dispatch);
 };
 
 const ReviewCardContainer = connect(
@@ -16,5 +16,4 @@ const ReviewCardContainer = connect(
   mapDispatchToProps
 )(ReviewCard);
 
-export default ReviewCardContainer;
-*/
+export default ReviewCardContainer;*/

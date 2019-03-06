@@ -3,13 +3,19 @@
 body {
   background-color: $light-gray;
 
+  .unstyled-btn {
+    background: none;
+    border: none;
+    outline: 0;
+    color: inherit;
+    font-weight: inherit;
+  }
+
   .dismissable-popup {
     display: flex; // so the 'x' button wont wrap to the next line
 
     .popup-dismiss-btn {
       padding-right: 0;
-      background: none;
-      border: none;
       color: $gray;
 
       &:hover,

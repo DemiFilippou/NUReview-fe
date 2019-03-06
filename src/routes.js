@@ -3,7 +3,6 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Login from './components/Login';
 import CompanySearch from './components/CompanySearch';
 import Company from './components/Company';
-import ReviewForm from './components/ReviewForm';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 

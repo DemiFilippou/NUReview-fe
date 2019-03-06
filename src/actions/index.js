@@ -14,6 +14,12 @@ export const GET_POSITIONS_FAIL = 'GET_POSITIONS_FAIL';
 export const GET_TAGS_BEGIN = 'GET_TAGS_BEGIN';
 export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS';
 export const GET_TAGS_FAIL = 'GET_TAGS_FAIL';
+export const UPVOTE_BEGIN = 'UPVOTE_BEGIN';
+export const UPVOTE_SUCCESS = 'UPVOTE_SUCCESS';
+export const UPVOTE_FAIL = 'UPVOTE_FAIL';
+export const DOWNVOTE_BEGIN = 'DOWNVOTE_BEGIN';
+export const DOWNVOTE_SUCCESS = 'DOWNVOTE_SUCCESS';
+export const DOWNVOTE_FAIL = 'DOWNVOTE_FAIL';
 export const ADD_POSITION_BEGIN = 'ADD_POSITION_BEGIN';
 export const ADD_POSITION_SUCCESS = 'ADD_POSITION_SUCCESS';
 export const ADD_POSITION_FAIL = 'ADD_POSITION_FAIL';
@@ -149,6 +155,62 @@ export const getTagsSuccess = (tags) => ({
 
 export const getTagsFail = (error) => ({
   type: GET_TAGS_FAIL,
+  payload: {error}
+});
+
+export const upvote = (reviewId) => {
+  return (dispatch) => {
+    dispatch(upvoteBegin());
+    api
+      .get(`/review/${reviewId}/upvote`)
+      .then((res) => {
+        dispatch(upvoteSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(upvoteFail(err.message));
+      });
+  };
+};
+
+export const upvoteBegin = () => ({
+  type: UPVOTE_BEGIN
+});
+
+export const upvoteSuccess = (tags) => ({
+  type: UPVOTE_SUCCESS,
+  payload: tags
+});
+
+export const upvoteFail = (error) => ({
+  type: UPVOTE_FAIL,
+  payload: {error}
+});
+
+export const downvote = (reviewId) => {
+  return (dispatch) => {
+    dispatch(downvoteBegin());
+    api
+      .get(`/review/${reviewId}/downvote`)
+      .then((res) => {
+        dispatch(downvoteSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(downvoteFail(err.message));
+      });
+  };
+};
+
+export const downvoteBegin = () => ({
+  type: DOWNVOTE_BEGIN
+});
+
+export const downvoteSuccess = (tags) => ({
+  type: DOWNVOTE_SUCCESS,
+  payload: tags
+});
+
+export const downvoteFail = (error) => ({
+  type: DOWNVOTE_FAIL,
   payload: {error}
 });
 

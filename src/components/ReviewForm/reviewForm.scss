@@ -19,7 +19,8 @@
         margin-bottom: 0.5em;
 
         &:hover,
-        &:focus {
+        &:focus,
+        &:focus-within {
           cursor: pointer;
           box-shadow: $gray 0px 3px 20px 0px;
         }
@@ -28,13 +29,15 @@
           background-color: $red;
           color: white;
           &:hover,
-          &:focus {
+          &:focus,
+          &:focus-within {
             box-shadow: $gray 0px 3px 20px 0px;
           }
         }
       }
     }
   }
+
   .row {
     display: flex;
     flex-wrap: wrap;
@@ -84,6 +87,13 @@
       .rc-slider {
         padding-bottom: 4em;
       }
+    }
+  }
+
+  .submit-review-btn {
+    &.custom-disabled {
+      cursor: default;
+      opacity: 0.45 !important;
     }
   }
 }

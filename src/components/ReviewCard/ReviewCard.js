@@ -3,7 +3,7 @@ import './reviewCard.scss';
 import classNames from 'classnames';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import {Label} from 'semantic-ui-react';
+import {Label, Icon} from 'semantic-ui-react';
 
 class ReviewCard extends React.Component {
   constructor(props) {
@@ -67,6 +67,13 @@ class ReviewCard extends React.Component {
           </div>
         </div>
         <div className="review-ratings-wrapper">
+          <div className="votes">
+            <button className="unstyled-btn">
+              <Icon name="chevron up" />
+            </button>
+            <div>{review.score}</div>
+            <Icon name="chevron down" />
+          </div>
           {this.renderIcon()}
           <div className="review-ratings">
             <div className="review-rating">

@@ -62,7 +62,7 @@ class PositionDropdown extends Component {
         content={
           <div className="dismissable-popup">
             {this.state.error}
-            <button onClick={() => this.setState({error: ''})} className="popup-dismiss-btn">
+            <button onClick={() => this.setState({error: ''})} className="popup-dismiss-btn unstyled-btn">
               <Icon name="x" />
             </button>
           </div>

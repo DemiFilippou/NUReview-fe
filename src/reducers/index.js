@@ -145,7 +145,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         newReview: newReviewTemplate
       };
-    case SELECT_TAG:
     default:
       return state;
   }
