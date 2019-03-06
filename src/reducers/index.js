@@ -6,6 +6,8 @@ import {
   GET_COMPANY_SUCCESS,
   GET_POSITIONS_SUCCESS,
   GET_TAGS_SUCCESS,
+  UPVOTE_SUCCESS,
+  DOWNVOTE_SUCCESS,
   ADD_POSITION_SUCCESS,
   ENTER_POSITION,
   ENTER_SEMESTER,
@@ -67,9 +69,10 @@ const reducer = (state = initialState, action) => {
         }
       };
     case GET_COMPANY_SUCCESS:
+      const withVotes = action.payload.reviews.map((review) => ({...review, isUpvoted: false, isDownvoted: false}));
       return {
         ...state,
-        company: action.payload
+        company: {...action.payload, reviews: withVotes}
       };
     case GET_POSITIONS_SUCCESS:
       return {
@@ -80,6 +83,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         tags: action.payload
+      };
+    case UPVOTE_SUCCESS:
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          reviews: state.company.reviews.map((review) =>
+            review.id === action.payload.id ? {...review, isUpvoted: !review.isUpvoted, isDownvoted: false} : review
+          )
+        }
+      };
+    case DOWNVOTE_SUCCESS:
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          reviews: state.company.reviews.map((review) =>
+            review.id === action.payload.id ? {...review, isDownvoted: !review.isDownvoted, isUpvoted: false} : review
+          )
+        }
       };
     case SELECT_TAG:
       return {

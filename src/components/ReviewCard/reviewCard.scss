@@ -36,11 +36,14 @@
       align-items: center;
       color: $medium-gray;
       font-size: 3em;
-      i {
+      i.chevron {
         height: inherit;
         &:hover {
           color: $gray;
           cursor: pointer;
+        }
+        &.active {
+          color: $gray;
         }
       }
     }

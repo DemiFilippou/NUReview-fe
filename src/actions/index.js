@@ -160,9 +160,9 @@ export const getTagsFail = (error) => ({
 
 export const upvote = (reviewId) => {
   return (dispatch) => {
-    dispatch(upvoteBegin());
+    dispatch(upvoteBegin(reviewId));
     api
-      .get(`/review/${reviewId}/upvote`)
+      .get(`/reviews/${reviewId}/upvote`)
       .then((res) => {
         dispatch(upvoteSuccess(res.data));
       })
@@ -172,13 +172,14 @@ export const upvote = (reviewId) => {
   };
 };
 
-export const upvoteBegin = () => ({
-  type: UPVOTE_BEGIN
+export const upvoteBegin = (reviewId) => ({
+  type: UPVOTE_BEGIN,
+  reviewId
 });
 
-export const upvoteSuccess = (tags) => ({
+export const upvoteSuccess = (review) => ({
   type: UPVOTE_SUCCESS,
-  payload: tags
+  payload: review
 });
 
 export const upvoteFail = (error) => ({
@@ -188,9 +189,9 @@ export const upvoteFail = (error) => ({
 
 export const downvote = (reviewId) => {
   return (dispatch) => {
-    dispatch(downvoteBegin());
+    dispatch(downvoteBegin(reviewId));
     api
-      .get(`/review/${reviewId}/downvote`)
+      .get(`/reviews/${reviewId}/downvote`)
       .then((res) => {
         dispatch(downvoteSuccess(res.data));
       })
@@ -200,13 +201,14 @@ export const downvote = (reviewId) => {
   };
 };
 
-export const downvoteBegin = () => ({
-  type: DOWNVOTE_BEGIN
+export const downvoteBegin = (reviewId) => ({
+  type: DOWNVOTE_BEGIN,
+  reviewId
 });
 
-export const downvoteSuccess = (tags) => ({
+export const downvoteSuccess = (review) => ({
   type: DOWNVOTE_SUCCESS,
-  payload: tags
+  payload: review
 });
 
 export const downvoteFail = (error) => ({

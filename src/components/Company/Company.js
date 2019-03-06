@@ -1,6 +1,6 @@
 import React from 'react';
 import './company.scss';
-import ReviewCard from '../ReviewCard';
+import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
 
 class Company extends React.Component {
@@ -26,7 +26,7 @@ class Company extends React.Component {
             {this.renderReviewForm()}
           </header>
           <div className="company-reviews">
-            {reviews && reviews.map((review) => <ReviewCard review={review} key={review.id} />)}
+            {reviews && reviews.map((review) => <ReviewCardContainer review={review} key={review.id} />)}
           </div>
         </div>
       </div>

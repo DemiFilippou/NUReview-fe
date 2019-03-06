@@ -53,6 +53,11 @@ class ReviewCard extends React.Component {
         10: {label: 'Strongly Agree'}
       }
     };
+    const upvoteClassnames = classNames({chevron: true, up: true, active: review.isUpvoted});
+    const downvoteClassnames = classNames({chevron: true, down: true, active: review.isDownvoted});
+    let upvoteScore = review.score;
+    if (review.isDownvoted) --upvoteScore;
+    if (review.isUpvoted) ++upvoteScore;
 
     return (
       <div className="review-card">
@@ -68,11 +73,23 @@ class ReviewCard extends React.Component {
         </div>
         <div className="review-ratings-wrapper">
           <div className="votes">
-            <button className="unstyled-btn">
-              <Icon name="chevron up" />
+            <button
+              className="unstyled-btn"
+              onClick={() => {
+                this.props.upvote(review.id);
+              }}
+            >
+              <Icon className={upvoteClassnames} />
             </button>
-            <div>{review.score}</div>
-            <Icon name="chevron down" />
+            <div>{upvoteScore}</div>
+            <button
+              className="unstyled-btn"
+              onClick={() => {
+                this.props.downvote(review.id);
+              }}
+            >
+              <Icon className={downvoteClassnames} />
+            </button>
           </div>
           {this.renderIcon()}
           <div className="review-ratings">
