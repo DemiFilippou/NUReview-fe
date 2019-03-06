@@ -18,6 +18,8 @@
         color: white;
         background-color: $gray;
         border: 2px solid transparent;
+        height: fit-content;
+        align-self: center;
 
         &:hover {
           background-color: white;

@@ -72,6 +72,21 @@ class ReviewCard extends React.Component {
           </div>
         </div>
         <div className="review-ratings-wrapper">
+          {this.renderIcon()}
+          <div className="review-ratings">
+            <div className="review-rating">
+              <div className="question"> I enjoyed this co-op </div>
+              <Slider className="disabled" {...sliderProps} value={review.enjoyment} />
+            </div>
+            <div className="review-rating">
+              <div className="question"> I learned a lot on this co-op </div>
+              <Slider className="disabled" {...sliderProps} value={review.learning} />
+            </div>
+            <div className="review-rating">
+              <div className="question"> I would recommend this co-op to a friend </div>
+              <Slider className="disabled" {...sliderProps} value={review.recommend} />
+            </div>
+          </div>
           <div className="votes">
             <button
               className="unstyled-btn"
@@ -90,21 +105,6 @@ class ReviewCard extends React.Component {
             >
               <Icon className={downvoteClassnames} />
             </button>
-          </div>
-          {this.renderIcon()}
-          <div className="review-ratings">
-            <div className="review-rating">
-              <div className="question"> I enjoyed this co-op </div>
-              <Slider className="disabled" {...sliderProps} value={review.enjoyment} />
-            </div>
-            <div className="review-rating">
-              <div className="question"> I learned a lot on this co-op </div>
-              <Slider className="disabled" {...sliderProps} value={review.learning} />
-            </div>
-            <div className="review-rating">
-              <div className="question"> I would recommend this co-op to a friend </div>
-              <Slider className="disabled" {...sliderProps} value={review.recommend} />
-            </div>
           </div>
         </div>
         <div className="review-body">{review.body}</div>
