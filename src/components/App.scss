@@ -11,6 +11,13 @@ body {
     font-weight: inherit;
   }
 
+  .grow {
+    transition: all 0.2s ease-in-out;
+  }
+  .grow:hover {
+    transform: scale(1.2);
+  }
+
   .dismissable-popup {
     display: flex; // so the 'x' button wont wrap to the next line
 

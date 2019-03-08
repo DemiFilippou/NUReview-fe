@@ -53,11 +53,8 @@ class ReviewCard extends React.Component {
         10: {label: 'Strongly Agree'}
       }
     };
-    const upvoteClassnames = classNames({chevron: true, up: true, active: review.isUpvoted});
-    const downvoteClassnames = classNames({chevron: true, down: true, active: review.isDownvoted});
-    let upvoteScore = review.score;
-    if (review.isDownvoted) --upvoteScore;
-    if (review.isUpvoted) ++upvoteScore;
+    const upvoteClassnames = classNames({chevron: true, up: true, grow: true, active: review.user_vote === 1});
+    const downvoteClassnames = classNames({chevron: true, down: true, grow: true, active: review.user_vote === -1});
 
     return (
       <div className="review-card">
@@ -91,16 +88,16 @@ class ReviewCard extends React.Component {
             <button
               className="unstyled-btn"
               onClick={() => {
-                this.props.upvote(review.id);
+                review.user_vote === 1 ? this.props.vote(review.id, 0) : this.props.vote(review.id, 1);
               }}
             >
               <Icon className={upvoteClassnames} />
             </button>
-            <div>{upvoteScore}</div>
+            <div>{review.score}</div>
             <button
               className="unstyled-btn"
               onClick={() => {
-                this.props.downvote(review.id);
+                review.user_vote === -1 ? this.props.vote(review.id, 0) : this.props.vote(review.id, -1);
               }}
             >
               <Icon className={downvoteClassnames} />

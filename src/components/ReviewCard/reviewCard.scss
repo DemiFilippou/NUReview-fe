@@ -39,11 +39,11 @@
       i.chevron {
         height: inherit;
         &:hover {
-          color: $gray;
+          color: $semantic-dark-gray;
           cursor: pointer;
         }
         &.active {
-          color: $gray;
+          color: $semantic-dark-gray;
         }
       }
     }

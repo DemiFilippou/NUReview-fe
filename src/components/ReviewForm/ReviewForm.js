@@ -5,6 +5,7 @@ import PositionDropdownContainer from './Fields/PositionDropdown';
 import SemesterDropdownContainer from './Fields/SemesterDropdown';
 import YearDropdownContainer from './Fields/YearDropdown';
 import WageFieldContainer from './Fields/WageField';
+import ErrorMessage from '../ErrorMessage';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import {forOwn} from 'lodash';
@@ -17,7 +18,7 @@ class ReviewForm extends React.Component {
 
     this.state = {
       isCloseConfirmationOpen: false,
-      isModalOpen: null
+      isModalOpen: false
     };
 
     this.openModal = this.openModal.bind(this);
@@ -26,6 +27,7 @@ class ReviewForm extends React.Component {
     this.renderTags = this.renderTags.bind(this);
     this.submitReview = this.submitReview.bind(this);
     this.handleConfirmClose = this.handleConfirmClose.bind(this);
+    this.errorRef = React.createRef();
   }
 
   // when the form is opened, we load data
@@ -40,7 +42,6 @@ class ReviewForm extends React.Component {
   // if they have, we render a confirmation modal to make sure they do not accidentally abandon their changes
   onModalClose() {
     let isFormDirty = false;
-
     forOwn(this.props.newReview, (value, key) => {
       if (key === 'companyId') return;
       if (value !== newReviewTemplate[key]) {
@@ -128,6 +129,16 @@ class ReviewForm extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.errorMessage && !prevProps.errorMessage) {
+      this.errorRef.current.scrollIntoView();
+    }
+    if (this.props.successMessage && !prevProps.successMessage) {
+      this.props.clearNewReviewForm();
+      this.setState({isCloseConfirmationOpen: false, isModalOpen: false});
+    }
+  }
+
   render() {
     const sliderProps = {
       defaultValue: 1,
@@ -156,6 +167,11 @@ class ReviewForm extends React.Component {
         >
           <Modal.Header>Writing a review for {this.props.companyName}</Modal.Header>
           <Modal.Content scrolling>
+            {this.props.errorMessage && (
+              <div ref={this.errorRef} className="add-review-error">
+                <ErrorMessage header="Error Saving Review" message={this.props.errorMessage} />
+              </div>
+            )}
             <Form>
               <div className="row">
                 <Form.Field className="position" required>

@@ -18,7 +18,12 @@ import {
 } from '../../actions';
 
 const mapStateToProps = (state) => {
-  return {newReview: state.newReview, tags: state.tags};
+  return {
+    newReview: state.newReview,
+    tags: state.tags,
+    errorMessage: state.error,
+    successMessage: state.successMessage
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

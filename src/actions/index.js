@@ -14,12 +14,9 @@ export const GET_POSITIONS_FAIL = 'GET_POSITIONS_FAIL';
 export const GET_TAGS_BEGIN = 'GET_TAGS_BEGIN';
 export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS';
 export const GET_TAGS_FAIL = 'GET_TAGS_FAIL';
-export const UPVOTE_BEGIN = 'UPVOTE_BEGIN';
-export const UPVOTE_SUCCESS = 'UPVOTE_SUCCESS';
-export const UPVOTE_FAIL = 'UPVOTE_FAIL';
-export const DOWNVOTE_BEGIN = 'DOWNVOTE_BEGIN';
-export const DOWNVOTE_SUCCESS = 'DOWNVOTE_SUCCESS';
-export const DOWNVOTE_FAIL = 'DOWNVOTE_FAIL';
+export const VOTE_BEGIN = 'VOTE_BEGIN';
+export const VOTE_SUCCESS = 'VOTE_SUCCESS';
+export const VOTE_FAIL = 'VOTE_FAIL';
 export const ADD_POSITION_BEGIN = 'ADD_POSITION_BEGIN';
 export const ADD_POSITION_SUCCESS = 'ADD_POSITION_SUCCESS';
 export const ADD_POSITION_FAIL = 'ADD_POSITION_FAIL';
@@ -38,6 +35,7 @@ export const CLEAR_NEW_REVIEW_FORM = 'CLEAR_NEW_REVIEW_FORM';
 export const ADD_REVIEW_BEGIN = 'ADD_REVIEW_BEGIN';
 export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
 export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
+export const SET_SUCCESS_MESSAGE = 'SET_SUCCESS_MESSAGE';
 
 export const searchCompany = (query) => {
   return (dispatch) => {
@@ -158,61 +156,33 @@ export const getTagsFail = (error) => ({
   payload: {error}
 });
 
-export const upvote = (reviewId) => {
+export const vote = (reviewId, value) => {
   return (dispatch) => {
-    dispatch(upvoteBegin(reviewId));
+    dispatch(voteBegin(reviewId, value));
     api
-      .get(`/reviews/${reviewId}/upvote`)
+      .post('/votes', {value: value, review_id: reviewId})
       .then((res) => {
-        dispatch(upvoteSuccess(res.data));
+        dispatch(voteSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(upvoteFail(err.message));
+        dispatch(voteFail(err.message));
       });
   };
 };
 
-export const upvoteBegin = (reviewId) => ({
-  type: UPVOTE_BEGIN,
-  reviewId
+export const voteBegin = (reviewId, value) => ({
+  type: VOTE_BEGIN,
+  reviewId,
+  value
 });
 
-export const upvoteSuccess = (review) => ({
-  type: UPVOTE_SUCCESS,
+export const voteSuccess = (review) => ({
+  type: VOTE_SUCCESS,
   payload: review
 });
 
-export const upvoteFail = (error) => ({
-  type: UPVOTE_FAIL,
-  payload: {error}
-});
-
-export const downvote = (reviewId) => {
-  return (dispatch) => {
-    dispatch(downvoteBegin(reviewId));
-    api
-      .get(`/reviews/${reviewId}/downvote`)
-      .then((res) => {
-        dispatch(downvoteSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(downvoteFail(err.message));
-      });
-  };
-};
-
-export const downvoteBegin = (reviewId) => ({
-  type: DOWNVOTE_BEGIN,
-  reviewId
-});
-
-export const downvoteSuccess = (review) => ({
-  type: DOWNVOTE_SUCCESS,
-  payload: review
-});
-
-export const downvoteFail = (error) => ({
-  type: DOWNVOTE_FAIL,
+export const voteFail = (error) => ({
+  type: VOTE_FAIL,
   payload: {error}
 });
 
@@ -318,7 +288,9 @@ export const addReview = (review) => {
         dispatch(addReviewSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(addReviewFail(err.message));
+        const errorMsgs = err.response && err.response.data && err.response.data.errors;
+        const errorMsg = errorMsgs && errorMsgs.length ? errorMsgs.join() : 'Sorry, something went wrong.';
+        dispatch(addReviewFail(errorMsg));
       });
   };
 };
@@ -336,4 +308,9 @@ export const addReviewSuccess = (position) => ({
 export const addReviewFail = (error) => ({
   type: ADD_REVIEW_FAIL,
   payload: {error}
+});
+
+export const setSuccessMessage = (msg) => ({
+  type: SET_SUCCESS_MESSAGE,
+  msg
 });

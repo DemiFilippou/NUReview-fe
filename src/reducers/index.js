@@ -6,8 +6,7 @@ import {
   GET_COMPANY_SUCCESS,
   GET_POSITIONS_SUCCESS,
   GET_TAGS_SUCCESS,
-  UPVOTE_SUCCESS,
-  DOWNVOTE_SUCCESS,
+  VOTE_SUCCESS,
   ADD_POSITION_SUCCESS,
   ENTER_POSITION,
   ENTER_SEMESTER,
@@ -20,7 +19,11 @@ import {
   ENTER_BODY,
   SELECT_TAG,
   SET_COMPANY_ID,
-  CLEAR_NEW_REVIEW_FORM
+  CLEAR_NEW_REVIEW_FORM,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_BEGIN,
+  ADD_REVIEW_FAIL,
+  SET_SUCCESS_MESSAGE
 } from '../actions';
 import newReviewTemplate from '../newReviewTemplate';
 import {xor} from 'lodash';
@@ -30,7 +33,9 @@ let initialState = {
   company: {},
   positions: [],
   tags: [],
-  newReview: newReviewTemplate
+  newReview: newReviewTemplate,
+  error: '',
+  successMessage: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,10 +74,9 @@ const reducer = (state = initialState, action) => {
         }
       };
     case GET_COMPANY_SUCCESS:
-      const withVotes = action.payload.reviews.map((review) => ({...review, isUpvoted: false, isDownvoted: false}));
       return {
         ...state,
-        company: {...action.payload, reviews: withVotes}
+        company: {...action.payload}
       };
     case GET_POSITIONS_SUCCESS:
       return {
@@ -84,23 +88,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         tags: action.payload
       };
-    case UPVOTE_SUCCESS:
+    case VOTE_SUCCESS:
       return {
         ...state,
         company: {
           ...state.company,
           reviews: state.company.reviews.map((review) =>
-            review.id === action.payload.id ? {...review, isUpvoted: !review.isUpvoted, isDownvoted: false} : review
-          )
-        }
-      };
-    case DOWNVOTE_SUCCESS:
-      return {
-        ...state,
-        company: {
-          ...state.company,
-          reviews: state.company.reviews.map((review) =>
-            review.id === action.payload.id ? {...review, isDownvoted: !review.isDownvoted, isUpvoted: false} : review
+            review.id === action.payload.review_id
+              ? {
+                  ...review,
+                  user_vote: action.payload.value,
+                  score: action.payload.review.score
+                }
+              : review
           )
         }
       };
@@ -168,6 +168,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         newReview: newReviewTemplate
       };
+    case ADD_REVIEW_FAIL:
+      return {...state, error: action.payload.error, successMessage: ''};
+    case ADD_REVIEW_BEGIN:
+      return {...state, error: ''};
+    case ADD_REVIEW_SUCCESS:
+      return {...state, error: '', successMessage: 'Thanks for your review!'};
+    case SET_SUCCESS_MESSAGE:
+      return {...state, successMessage: ''};
     default:
       return state;
   }

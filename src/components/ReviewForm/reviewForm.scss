@@ -1,7 +1,7 @@
 @import 'src/sass-variables';
 
 .modal.review-form {
-  .header {
+  > .header {
     background-color: $light-red;
   }
 
@@ -10,6 +10,11 @@
 
     &.scrolling {
       max-height: calc(100vh - 10em);
+    }
+
+    .add-review-error {
+      padding-top: 1em;
+      padding-bottom: 1em;
     }
 
     .tags {
