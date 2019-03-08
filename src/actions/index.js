@@ -80,7 +80,7 @@ export const getCompany = (id) => {
         dispatch(getCompanySuccess(res.data));
       })
       .catch((err) => {
-        dispatch(getCompanyFail(err.message));
+        dispatch(getCompanyFail(err));
       });
   };
 };

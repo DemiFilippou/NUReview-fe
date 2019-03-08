@@ -2,6 +2,7 @@ import React from 'react';
 import './company.scss';
 import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
+import NoMatch from '../NoMatch';
 import {Message} from 'semantic-ui-react';
 
 class Company extends React.Component {
@@ -16,7 +17,7 @@ class Company extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.successMessage !== prevProps.successMessage) {
+    if (this.props.successMessage && !prevProps.successMessage) {
       this.props.getCompany(this.id);
     }
   }
@@ -39,6 +40,9 @@ class Company extends React.Component {
   }
 
   render() {
+    if (this.props.error.code === 404) {
+      return <NoMatch />;
+    }
     const name = this.props.company && this.props.company.name;
     const reviews = this.props.company && this.props.company.reviews;
 

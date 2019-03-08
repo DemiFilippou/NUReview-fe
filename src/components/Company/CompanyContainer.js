@@ -6,7 +6,8 @@ import {getCompany, setSuccessMessage} from '../../actions';
 const mapStateToProps = (state) => {
   return {
     company: state.nuReview.company,
-    successMessage: state.nuReview.successMessage
+    successMessage: state.nuReview.successMessage,
+    error: state.error.getCompany
   };
 };
 
