@@ -76,8 +76,8 @@ class PositionDropdown extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    positions: state.positions,
-    positionId: state.newReview.positionId
+    positions: state.nuReview.positions,
+    positionId: state.nuReview.newReview.positionId
   };
 };
 

@@ -63,7 +63,7 @@ class WageField extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    wage: state.newReview.wage
+    wage: state.nuReview.newReview.wage
   };
 };
 

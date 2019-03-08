@@ -19,10 +19,10 @@ import {
 
 const mapStateToProps = (state) => {
   return {
-    newReview: state.newReview,
-    tags: state.tags,
-    errorMessage: state.error,
-    successMessage: state.successMessage
+    newReview: state.nuReview.newReview,
+    tags: state.nuReview.tags,
+    errorMessage: state.error.addReview,
+    successMessage: state.nuReview.successMessage
   };
 };
 

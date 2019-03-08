@@ -5,9 +5,9 @@ import {searchCompany, setCompanyChosen} from '../../actions';
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.search.isLoading,
-    companies: state.search.companies,
-    companyChosen: state.search.companyChosen
+    isLoading: state.nuReview.search.isLoading,
+    companies: state.nuReview.search.companies,
+    companyChosen: state.nuReview.search.companyChosen
   };
 };
 

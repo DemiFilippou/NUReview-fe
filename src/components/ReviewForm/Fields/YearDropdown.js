@@ -32,7 +32,7 @@ class YearDropdown extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    semester: state.newReview.semester
+    semester: state.nuReview.newReview.semester
   };
 };
 

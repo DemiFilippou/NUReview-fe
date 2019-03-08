@@ -21,7 +21,6 @@ import {
   SET_COMPANY_ID,
   CLEAR_NEW_REVIEW_FORM,
   ADD_REVIEW_SUCCESS,
-  ADD_REVIEW_BEGIN,
   ADD_REVIEW_FAIL,
   SET_SUCCESS_MESSAGE
 } from '../actions';
@@ -34,11 +33,10 @@ let initialState = {
   positions: [],
   tags: [],
   newReview: newReviewTemplate,
-  error: '',
   successMessage: ''
 };
 
-const reducer = (state = initialState, action) => {
+const nuReviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_COMPANY_BEGIN:
       return {
@@ -169,11 +167,9 @@ const reducer = (state = initialState, action) => {
         newReview: newReviewTemplate
       };
     case ADD_REVIEW_FAIL:
-      return {...state, error: action.payload.error, successMessage: ''};
-    case ADD_REVIEW_BEGIN:
-      return {...state, error: ''};
+      return {...state, successMessage: ''};
     case ADD_REVIEW_SUCCESS:
-      return {...state, error: '', successMessage: 'Thanks for your review!'};
+      return {...state, successMessage: 'Thanks for your review!'};
     case SET_SUCCESS_MESSAGE:
       return {...state, successMessage: ''};
     default:
@@ -181,4 +177,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default nuReviewReducer;
