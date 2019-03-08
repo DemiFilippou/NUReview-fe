@@ -10,7 +10,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="logo" alt="logo">
-            <a href="/">NUReview</a>
+            <a href="/" className="unstyled-link">
+              NUReview
+            </a>
           </div>
           {localStorage.nureviewtoken && (
             <Button onClick={this.logout} className="logout">

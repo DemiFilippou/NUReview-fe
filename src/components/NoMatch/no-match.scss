@@ -1,0 +1,16 @@
+@import 'src/sass-variables';
+
+.no-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+  height: calc(100vh - 20em);
+  justify-content: center;
+
+  color: gray;
+
+  i {
+    font-size: 10em;
+  }
+}

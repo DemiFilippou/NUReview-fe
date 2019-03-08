@@ -5,6 +5,7 @@ import CompanySearch from './components/CompanySearch';
 import Company from './components/Company';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
+import NoMatch from './components/NoMatch';
 
 const Main = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ const Main = () => (
       <Route exact path="/register" component={Register} />
       <PrivateRoute exact path="/" component={CompanySearch} />
       <PrivateRoute exact path="/company/:id" component={Company} />
+      <Route component={NoMatch} />
     </Switch>
   </BrowserRouter>
 );
