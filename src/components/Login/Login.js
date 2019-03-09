@@ -4,8 +4,6 @@ import LoginApi from '../../loginApi.js';
 import {Redirect, Link} from 'react-router-dom';
 import {Form, Message} from 'semantic-ui-react';
 
-// TODO: Tell user when login fails
-
 class Login extends React.Component {
   constructor(props) {
     super(props);

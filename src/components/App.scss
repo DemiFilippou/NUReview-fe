@@ -18,6 +18,11 @@ body {
     transform: scale(1.2);
   }
 
+  .ui.input > input:focus {
+    box-shadow: 0 0 10px $red;
+    border-color: $medium-red;
+  }
+
   .dismissable-popup {
     display: flex; // so the 'x' button wont wrap to the next line
 

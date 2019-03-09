@@ -44,6 +44,7 @@ class CompanySearch extends React.Component {
       <div className="search-wrapper">
         <Header>Search for a Company</Header>
         <Search
+          selectFirstResult
           className="company-search-bar"
           placeholder="Company Name"
           loading={this.props.isLoading}
