@@ -34,6 +34,9 @@ class CompanySearch extends React.Component {
     // this is a bit of a hack until we get around to custom rendering
     // of the search results, which can then be a list of links.
     if (this.state.redirect) {
+      this.props.history.push({
+        pathname: '/'
+      });
       return <Redirect to={`/company/${this.props.companyChosen.id}`} />;
     }
     const companies = this.props.companies.map((c) => ({title: c.name, id: c.id}));
