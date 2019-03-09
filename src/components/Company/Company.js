@@ -3,13 +3,15 @@ import './company.scss';
 import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
 import NoMatch from '../NoMatch';
-import {Message} from 'semantic-ui-react';
+import {Message, Loader, Dimmer} from 'semantic-ui-react';
+import * as moment from 'moment';
 
 class Company extends React.Component {
   constructor(props) {
     super(props);
     this.id = this.props.match.params.id;
     this.handleMessageDismiss = this.handleMessageDismiss.bind(this);
+    this.state = {isLoading: true, loadingStart: Date.now()};
   }
 
   componentDidMount() {
@@ -19,6 +21,20 @@ class Company extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.successMessage && !prevProps.successMessage) {
       this.props.getCompany(this.id);
+    }
+
+    // data just started loading
+    if (this.props.isLoading && !prevProps.isLoading) {
+      this.setState({isLoading: true, loadingStart: moment()});
+    }
+    // data just stopped loading
+    if (!this.props.isLoading && prevProps.isLoading) {
+      const difference = this.state.loadingStart - Date.now();
+      if (difference < 500) {
+        setTimeout(() => {
+          this.setState({isLoading: false, loadingStart: ''});
+        }, 500 - difference);
+      }
     }
   }
 
@@ -40,9 +56,17 @@ class Company extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <Dimmer active>
+          <Loader size="huge">Loading</Loader>
+        </Dimmer>
+      );
+    }
     if (this.props.error.code === 404) {
       return <NoMatch />;
     }
+
     const name = this.props.company && this.props.company.name;
     const reviews = this.props.company && this.props.company.reviews;
 

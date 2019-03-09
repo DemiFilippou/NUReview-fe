@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     company: state.nuReview.company,
     successMessage: state.nuReview.successMessage,
-    error: state.error.getCompany
+    error: state.error.getCompany,
+    isLoading: state.nuReview.company.isLoading
   };
 };
 

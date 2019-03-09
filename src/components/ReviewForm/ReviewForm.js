@@ -32,6 +32,7 @@ class ReviewForm extends React.Component {
 
   // when the form is opened, we load data
   openModal() {
+    this.props.setSuccessMessage('');
     this.props.getPositions();
     this.props.getTags();
     this.props.setCompanyId(this.props.companyId);

@@ -14,7 +14,8 @@ import {
   selectTag,
   setCompanyId,
   clearNewReviewForm,
-  addReview
+  addReview,
+  setSuccessMessage
 } from '../../actions';
 
 const mapStateToProps = (state) => {
@@ -40,7 +41,8 @@ const mapDispatchToProps = (dispatch) => {
       selectTag,
       setCompanyId,
       clearNewReviewForm,
-      addReview
+      addReview,
+      setSuccessMessage
     },
     dispatch
   );

@@ -61,7 +61,7 @@ class ReviewCard extends React.Component {
     if (review.wage) wageText = `$${review.wage}/hour`;
 
     return (
-      <div className="review-card">
+      <div className="review-card slide-in">
         <div className="header">
           <div className="row">
             <span> {review.position.title} </span>

@@ -3,7 +3,9 @@ import {
   SEARCH_COMPANY_SUCCESS,
   SEARCH_COMPANY_FAIL,
   SET_COMPANY_CHOSEN,
+  GET_COMPANY_BEGIN,
   GET_COMPANY_SUCCESS,
+  GET_COMPANY_FAIL,
   GET_POSITIONS_SUCCESS,
   GET_TAGS_SUCCESS,
   VOTE_SUCCESS,
@@ -71,10 +73,20 @@ const nuReviewReducer = (state = initialState, action) => {
           companyChosen: action.company
         }
       };
+    case GET_COMPANY_BEGIN:
+      return {
+        ...state,
+        company: {isLoading: true}
+      };
     case GET_COMPANY_SUCCESS:
       return {
         ...state,
-        company: {...action.payload}
+        company: {...action.payload, isLoading: false}
+      };
+    case GET_COMPANY_FAIL:
+      return {
+        ...state,
+        company: {isLoading: false}
       };
     case GET_POSITIONS_SUCCESS:
       return {
@@ -171,7 +183,7 @@ const nuReviewReducer = (state = initialState, action) => {
     case ADD_REVIEW_SUCCESS:
       return {...state, successMessage: 'Thanks for your review!'};
     case SET_SUCCESS_MESSAGE:
-      return {...state, successMessage: ''};
+      return {...state, successMessage: action.msg};
     default:
       return state;
   }
