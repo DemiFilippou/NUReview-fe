@@ -1,16 +1,17 @@
 import React from 'react';
 import './reviewForm.scss';
-import {Modal, Button, Form, Label, Confirm, Popup} from 'semantic-ui-react';
+import {Modal, Button, Form, Confirm, Popup} from 'semantic-ui-react';
 import PositionDropdownContainer from './Fields/PositionDropdown';
 import SemesterDropdownContainer from './Fields/SemesterDropdown';
 import YearDropdownContainer from './Fields/YearDropdown';
 import WageFieldContainer from './Fields/WageField';
+import SliderGroupContainer from './Fields/SliderGroup';
+import BodyFieldContainer from './Fields/BodyField';
+import AnonymousCheckboxContainer from './Fields/AnonymousCheckbox';
+import TagsContainer from './Fields/Tags';
 import ErrorMessage from '../ErrorMessage';
-import Slider from 'rc-slider/lib/Slider';
-import 'rc-slider/assets/index.css';
 import {forOwn} from 'lodash';
 import newReviewTemplate from '../../newReviewTemplate';
-import classNames from 'classnames';
 
 class ReviewForm extends React.Component {
   constructor(props) {
@@ -24,7 +25,6 @@ class ReviewForm extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.isFormIncomplete = this.isFormIncomplete.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
-    this.renderTags = this.renderTags.bind(this);
     this.submitReview = this.submitReview.bind(this);
     this.handleConfirmClose = this.handleConfirmClose.bind(this);
     this.errorRef = React.createRef();
@@ -44,6 +44,7 @@ class ReviewForm extends React.Component {
     let isFormDirty = false;
     forOwn(this.props.newReview, (value, key) => {
       if (key === 'companyId') return;
+      if (key === 'tagIds' && !this.props.newReview['tagIds'].length) return;
       if (value !== newReviewTemplate[key]) {
         isFormDirty = true;
         return;
@@ -86,21 +87,6 @@ class ReviewForm extends React.Component {
       }
     }
     return isIncomplete;
-  }
-
-  renderTags() {
-    return this.props.tags.map((tag) => {
-      const classes = classNames({tag: true, selected: tag.isSelected});
-
-      // wrap each tag in a button for accessibility purporses
-      return (
-        <Label className={classes} key={tag.id} onClick={() => this.props.selectTag(tag.id)}>
-          <button className="unstyled-btn" key={tag.id}>
-            {tag.tag}
-          </button>
-        </Label>
-      );
-    });
   }
 
   renderSubmitButton() {
@@ -178,11 +164,7 @@ class ReviewForm extends React.Component {
                   <label>Position</label>
                   <PositionDropdownContainer />
                 </Form.Field>
-                <Form.Checkbox
-                  className="anonymous"
-                  label="Remain Anonymous"
-                  onChange={(e) => this.props.toggleAnonymous()}
-                />
+                <AnonymousCheckboxContainer label="Remain Anonymous" />
               </div>
               <div className="row">
                 <Form.Field className="semester" required>
@@ -200,38 +182,15 @@ class ReviewForm extends React.Component {
               </div>
               <Form.Field required>
                 <label>Indicate your agreement towards the following</label>
-                <div className="slider-group">
-                  <div className="rating">
-                    <div className="question"> I enjoyed this co-op </div>
-                    <Slider
-                      {...sliderProps}
-                      value={newReview.enjoyment}
-                      onChange={(value) => this.props.enterEnjoyment(value)}
-                    />
-                  </div>
-                  <div className="rating">
-                    <div className="question"> I learned a lot on this co-op </div>
-                    <Slider
-                      {...sliderProps}
-                      value={newReview.learning}
-                      onChange={(value) => this.props.enterLearning(value)}
-                    />
-                  </div>
-                  <div className="rating">
-                    <div className="question"> I would recommend this co-op to a friend </div>
-                    <Slider
-                      {...sliderProps}
-                      value={newReview.recommend}
-                      onChange={(value) => this.props.enterRecommend(value)}
-                    />
-                  </div>
-                </div>
+                <SliderGroupContainer sliderProps={sliderProps} />
               </Form.Field>
-              <Form.TextArea label="Review" onBlur={(e) => this.props.enterBody(e.target.value)} />
+              <BodyFieldContainer />
               <Form.Field>
                 <label>Choose Tags</label>
               </Form.Field>
-              <div className="tags">{this.renderTags()}</div>
+              <div className="tags">
+                <TagsContainer />
+              </div>
               {this.renderSubmitButton()}
             </Form>
           </Modal.Content>

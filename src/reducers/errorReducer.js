@@ -8,11 +8,11 @@ let initialState = {
 const nuReviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_REVIEW_FAIL:
-      return {...state, error: action.payload.error};
+      return {...state, addReview: action.payload.error};
     case ADD_REVIEW_BEGIN:
-      return {...state, error: ''};
+      return {...state, addReview: ''};
     case ADD_REVIEW_SUCCESS:
-      return {...state, error: ''};
+      return {...state, addReview: ''};
     case GET_COMPANY_BEGIN:
       return {...state, getCompany: initialState.getCompany};
     case GET_COMPANY_FAIL:

@@ -56,6 +56,10 @@ class ReviewCard extends React.Component {
     const upvoteClassnames = classNames({chevron: true, up: true, grow: true, active: review.user_vote === 1});
     const downvoteClassnames = classNames({chevron: true, down: true, grow: true, active: review.user_vote === -1});
 
+    let wageText = '';
+    if (review.wage === 0) wageText = 'Unpaid';
+    if (review.wage) wageText = `$${review.wage}/hour`;
+
     return (
       <div className="review-card">
         <div className="header">
@@ -65,7 +69,7 @@ class ReviewCard extends React.Component {
           </div>
           <div className="row">
             <span> {review.anonymous ? '' : review.user && review.user.name}</span>
-            <span> {review.hourly_rate ? `$${review.hourly_rate}/hour` : ''}</span>
+            <span>{wageText}</span>
           </div>
         </div>
         <div className="review-ratings-wrapper">
@@ -104,8 +108,8 @@ class ReviewCard extends React.Component {
             </button>
           </div>
         </div>
-        <div className="review-body">{review.body}</div>
-        <label>Tags:</label>
+        {review.body && <div className="review-body">{review.body}</div>}
+        <label className="tag-label">Tags:</label>
         <div className="review-tags">
           {review.tags && review.tags.length ? review.tags.map((tag) => this.renderTag(tag)) : 'None'}
         </div>
