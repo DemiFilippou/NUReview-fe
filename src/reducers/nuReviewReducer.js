@@ -39,7 +39,7 @@ let initialState = {
   tags: [],
   newReview: newReviewTemplate,
   successMessage: '',
-  isLoggedIn: false
+  isLoggedIn: !!localStorage.nureviewtoken
 };
 
 const nuReviewReducer = (state = initialState, action) => {

@@ -49,8 +49,8 @@ export const login = (loginInfo) => {
     api
       .post('/login', {user: loginInfo})
       .then((res) => {
-        localStorage.setItem('nureviewtoken', res.token);
-        api.defaults.headers['Authorization'] = res.token;
+        localStorage.setItem('nureviewtoken', res.data.token);
+        api.defaults.headers['Authorization'] = res.data.token;
         dispatch(loginSuccess(res.data));
       })
       .catch((err) => {
@@ -80,8 +80,8 @@ export const register = (registerInfo) => {
     api
       .post('/users', {user: registerInfo})
       .then((res) => {
-        localStorage.setItem('nureviewtoken', res.token);
-        api.defaults.headers['Authorization'] = res.token;
+        localStorage.setItem('nureviewtoken', res.data.token);
+        api.defaults.headers['Authorization'] = res.data.token;
         dispatch(registerSuccess(res.data));
       })
       .catch((err) => {
