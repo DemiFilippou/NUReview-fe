@@ -1,10 +1,7 @@
 import React from 'react';
-import LoginApi from '../../loginApi.js';
 import {Redirect, Link} from 'react-router-dom';
 import {Form, Message} from 'semantic-ui-react';
 import './register.scss';
-
-// TODO: actually tell user about validation errors.
 
 class Register extends React.Component {
   constructor(props) {
@@ -18,7 +15,6 @@ class Register extends React.Component {
       email: '',
       password: '',
       password_confirmation: '',
-      redirect: false,
       errors: []
     };
   }
@@ -33,35 +29,30 @@ class Register extends React.Component {
     });
   }
 
-  async register(e) {
+  componentDidUpdate(prevProps) {
+    if (this.props.error.length && !prevProps.error.length) {
+      this.setState({errors: this.state.errors.concat(this.props.error)});
+    }
+  }
+
+  register() {
     // reset the errors
     if (this.state.password !== this.state.password_confirmation) {
       this.setState({errors: ['Password confirmation must match password']});
       return;
     }
-
+    this.props.register(this.state);
     this.setState({errors: []});
-    let registerSucess;
-
-    try {
-      registerSucess = await LoginApi.register({user: this.state});
-    } catch (err) {
-      this.setState({errors: err});
-    }
-
-    if (registerSucess) {
-      this.setState({redirect: true});
-    }
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={{pathname: '/home'}} />;
+    if (this.props.isLoggedIn) {
+      return <Redirect to={{pathname: '/'}} />;
     }
 
     const errorsLength = this.state.errors.length;
     const errorMessageProps = {
-      error: !errorsLength,
+      error: errorsLength > 0,
       header: errorsLength === 1 ? 'Error' : 'Errors',
       content: errorsLength === 1 ? this.state.errors[0] : undefined,
       list: errorsLength > 1 ? this.state.errors : undefined,
@@ -70,8 +61,8 @@ class Register extends React.Component {
 
     return (
       <div className="login-form">
+        {errorsLength > 0 && <Message {...errorMessageProps} />}
         <Form className="register-form">
-          <Message {...errorMessageProps} />
           <Form.Input
             id="name"
             type="text"

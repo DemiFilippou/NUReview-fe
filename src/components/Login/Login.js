@@ -1,6 +1,5 @@
 import React from 'react';
 import './login.scss';
-import LoginApi from '../../loginApi.js';
 import {Redirect, Link} from 'react-router-dom';
 import {Form, Message} from 'semantic-ui-react';
 
@@ -9,13 +8,9 @@ class Login extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.login = this.login.bind(this);
-
     this.state = {
       email: '',
-      password: '',
-      redirect: false,
-      error: ''
+      password: ''
     };
   }
 
@@ -29,29 +24,15 @@ class Login extends React.Component {
     });
   }
 
-  async login(e) {
-    this.setState({error: ''});
-
-    let loginSuccess;
-    try {
-      loginSuccess = await LoginApi.login({user: this.state});
-    } catch (err) {
-      this.setState({error: err});
-    }
-    if (loginSuccess) {
-      this.setState({redirect: true});
-    }
-  }
-
   render() {
-    if (this.state.redirect) {
+    if (this.props.isLoggedIn) {
       return <Redirect to={{pathname: '/'}} />;
     }
 
     return (
       <div className="login-form">
         <Form>
-          <Message error={!this.state.error} header="Error" content={this.state.error} color="red" />
+          <Message error={!this.props.error.length} header="Error" content={this.props.error} color="red" />
           <Form.Input
             id="email"
             type="email"
@@ -72,7 +53,7 @@ class Login extends React.Component {
             label="Password"
             required
           />
-          <Form.Button onClick={this.login}>Login</Form.Button>
+          <Form.Button onClick={() => this.props.login(this.state)}>Login</Form.Button>
         </Form>
         <Link to="/register">Register</Link>
       </div>

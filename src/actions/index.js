@@ -1,6 +1,12 @@
 import api from '../api';
 import {snakeCase, mapKeys} from 'lodash';
 
+export const LOGIN_BEGIN = 'LOGIN_BEGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const REGISTER_BEGIN = 'REGISTER_BEGIN';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const SEARCH_COMPANY_BEGIN = 'SEARCH_COMPANY_BEGIN';
 export const SEARCH_COMPANY_SUCCESS = 'SEARCH_COMPANY_SUCCESS';
 export const SEARCH_COMPANY_FAIL = 'SEARCH_COMPANY_FAIL';
@@ -36,6 +42,68 @@ export const ADD_REVIEW_BEGIN = 'ADD_REVIEW_BEGIN';
 export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
 export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
 export const SET_SUCCESS_MESSAGE = 'SET_SUCCESS_MESSAGE';
+
+export const login = (loginInfo) => {
+  return (dispatch) => {
+    dispatch(loginBegin(loginInfo));
+    api
+      .post('/login', {user: loginInfo})
+      .then((res) => {
+        localStorage.setItem('nureviewtoken', res.token);
+        api.defaults.headers['Authorization'] = res.token;
+        dispatch(loginSuccess(res.data));
+      })
+      .catch((err) => {
+        const errorMsgs = err.response && err.response.data && err.response.data.message;
+        dispatch(loginFail(errorMsgs));
+      });
+  };
+};
+
+export const loginBegin = (userInfo) => ({
+  type: LOGIN_BEGIN,
+  userInfo
+});
+
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS
+});
+
+export const loginFail = (error) => ({
+  type: LOGIN_FAIL,
+  payload: {error}
+});
+
+export const register = (registerInfo) => {
+  return (dispatch) => {
+    dispatch(registerBegin(registerInfo));
+    api
+      .post('/users', {user: registerInfo})
+      .then((res) => {
+        localStorage.setItem('nureviewtoken', res.token);
+        api.defaults.headers['Authorization'] = res.token;
+        dispatch(registerSuccess(res.data));
+      })
+      .catch((err) => {
+        const errorMsgs = err.response && err.response.data && err.response.data.message;
+        dispatch(registerFail(errorMsgs));
+      });
+  };
+};
+
+export const registerBegin = (userInfo) => ({
+  type: REGISTER_BEGIN,
+  userInfo
+});
+
+export const registerSuccess = () => ({
+  type: REGISTER_SUCCESS
+});
+
+export const registerFail = (error) => ({
+  type: REGISTER_FAIL,
+  payload: {error}
+});
 
 export const searchCompany = (query) => {
   return (dispatch) => {
@@ -274,7 +342,6 @@ export const setCompanyId = (companyId) => ({
 });
 
 export const addReview = (review) => {
-  //const userId = JSON.parse(atob(localStorage.nureviewtoken.split('.')[1])).user;
   const reviewFormatted = {
     review: mapKeys(review, (v, k) => {
       return snakeCase(k);

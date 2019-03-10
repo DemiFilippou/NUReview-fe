@@ -1,4 +1,7 @@
 import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  REGISTER_SUCCESS,
   SEARCH_COMPANY_BEGIN,
   SEARCH_COMPANY_SUCCESS,
   SEARCH_COMPANY_FAIL,
@@ -35,7 +38,8 @@ let initialState = {
   positions: [],
   tags: [],
   newReview: newReviewTemplate,
-  successMessage: ''
+  successMessage: '',
+  isLoggedIn: false
 };
 
 const nuReviewReducer = (state = initialState, action) => {
@@ -184,6 +188,12 @@ const nuReviewReducer = (state = initialState, action) => {
       return {...state, successMessage: 'Thanks for your review!'};
     case SET_SUCCESS_MESSAGE:
       return {...state, successMessage: action.msg};
+    case LOGIN_SUCCESS:
+      return {...state, isLoggedIn: true};
+    case LOGIN_FAIL:
+      return {...state, isLoggedIn: false};
+    case REGISTER_SUCCESS:
+      return {...state, isLoggedIn: true};
     default:
       return state;
   }
