@@ -4,7 +4,6 @@ import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
 import NoMatch from '../NoMatch';
 import {Message, Loader, Dimmer} from 'semantic-ui-react';
-import * as moment from 'moment';
 
 class Company extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class Company extends React.Component {
 
     // data just started loading
     if (this.props.isLoading && !prevProps.isLoading) {
-      this.setState({isLoading: true, loadingStart: moment()});
+      this.setState({isLoading: true, loadingStart: Date.now()});
     }
     // data just stopped loading
     if (!this.props.isLoading && prevProps.isLoading) {
