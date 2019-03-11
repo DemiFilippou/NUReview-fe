@@ -185,13 +185,13 @@ class ReviewForm extends React.Component {
                 <label>Indicate your agreement towards the following</label>
                 <SliderGroupContainer sliderProps={sliderProps} />
               </Form.Field>
-              <BodyFieldContainer />
               <Form.Field>
                 <label>Choose Tags</label>
               </Form.Field>
               <div className="tags">
                 <TagsContainer />
               </div>
+              <BodyFieldContainer />
               {this.renderSubmitButton()}
             </Form>
           </Modal.Content>
