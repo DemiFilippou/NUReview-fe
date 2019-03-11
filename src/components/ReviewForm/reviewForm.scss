@@ -23,6 +23,11 @@
       .tag {
         margin-bottom: 0.5em;
 
+        button:hover,
+        button:focus {
+          cursor: pointer;
+        }
+
         &:hover,
         &:focus,
         &:focus-within {
