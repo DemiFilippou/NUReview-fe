@@ -36,8 +36,7 @@
         }
 
         &.selected {
-          background-color: $red;
-          color: white;
+          background-color: $light-red;
           &:hover,
           &:focus,
           &:focus-within {

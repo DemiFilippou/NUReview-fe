@@ -1,6 +1,7 @@
 import React from 'react';
 import './header.scss';
 import {Button} from 'semantic-ui-react';
+import logo from './logo.png';
 
 class Header extends React.Component {
   logout() {
@@ -13,7 +14,7 @@ class Header extends React.Component {
       <header className="App-header">
         <div className="logo" alt="logo">
           <a href="/" className="unstyled-link">
-            NUReview
+            <img src={logo} alt="NUReview logo" />
           </a>
         </div>
         {this.props.isLoggedIn && (
