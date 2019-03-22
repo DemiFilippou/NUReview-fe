@@ -66,10 +66,10 @@ class Register extends React.Component {
           <Form.Input
             id="name"
             type="text"
-            placeholder="Name"
+            placeholder="Full Name"
             name="name"
             onChange={this.handleChange}
-            label="Name"
+            label="Full Name"
             required
           />
           <Form.Input
