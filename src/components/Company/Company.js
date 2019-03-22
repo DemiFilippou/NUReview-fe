@@ -4,6 +4,7 @@ import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
 import NoMatch from '../NoMatch';
 import {Message, Loader, Dimmer} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 class Company extends React.Component {
   constructor(props) {
@@ -78,6 +79,11 @@ class Company extends React.Component {
             </Message>
           )}
           <header className="company-header">
+            <button className="unstyled-btn back-btn">
+              <Link to="/" className="unstyled-link">
+                <i class="far fa-arrow-alt-circle-left" />
+              </Link>
+            </button>
             <h1 className="company-name">{`Reading reviews for ${name}`}</h1>
             {this.renderReviewForm()}
           </header>

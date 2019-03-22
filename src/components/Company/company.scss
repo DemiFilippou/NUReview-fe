@@ -20,21 +20,33 @@
       padding-top: 1.25em;
       padding-left: 0.5em;
       padding-right: 0.5em;
-      button {
-        color: white;
-        background-color: $gray;
-        border: 2px solid transparent;
-        height: fit-content;
-        align-self: center;
 
-        &:hover {
-          background-color: white;
-          color: $red;
-          border: 2px solid $red;
-          box-shadow: $shadow-gray -1px 3px 32px;
+      button {
+        &.add-review {
+          color: white;
+          background-color: $gray;
+          border: 2px solid transparent;
+          height: fit-content;
+          align-self: center;
+
+          &:hover {
+            background-color: white;
+            color: $red;
+            border: 2px solid $red;
+            box-shadow: $shadow-gray -1px 3px 32px;
+          }
         }
-      }
-      .company-name {
+
+        &.back-btn {
+          color: $gray;
+          &:hover {
+            cursor: pointer;
+            color: $semantic-dark-gray;
+          }
+          i {
+            font-size: 3em;
+          }
+        }
       }
     }
     .company-reviews {
