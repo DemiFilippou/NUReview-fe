@@ -39,12 +39,12 @@
 
         &.back-btn {
           color: $gray;
-          &:hover {
-            cursor: pointer;
-            color: $semantic-dark-gray;
-          }
           i {
             font-size: 3em;
+            &:hover {
+              cursor: pointer;
+              color: $semantic-dark-gray;
+            }
           }
         }
       }
