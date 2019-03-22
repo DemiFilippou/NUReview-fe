@@ -81,7 +81,7 @@ class Company extends React.Component {
           <header className="company-header">
             <button className="unstyled-btn back-btn">
               <Link to="/" className="unstyled-link">
-                <i class="far fa-arrow-alt-circle-left" />
+                <i className="far fa-arrow-alt-circle-left" />
               </Link>
             </button>
             <h1 className="company-name">{`Reading reviews for ${name}`}</h1>

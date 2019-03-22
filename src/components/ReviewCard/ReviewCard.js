@@ -17,10 +17,10 @@ class ReviewCard extends React.Component {
     let icon;
 
     switch (true) {
-      case average >= 7:
+      case average >= 4:
         icon = 'fa-smile-beam';
         break;
-      case average >= 4:
+      case average >= 2:
         icon = 'fa-meh';
         break;
       default:
@@ -46,11 +46,11 @@ class ReviewCard extends React.Component {
     const {review} = this.props;
     const sliderProps = {
       min: 1,
-      max: 10,
+      max: 5,
       marks: {
         1: {label: 'Strongly\nDisagree'},
-        5: {label: 'Neutral'},
-        10: {label: 'Strongly Agree'}
+        3: {label: 'Neutral'},
+        5: {label: 'Strongly Agree'}
       }
     };
     const upvoteClassnames = classNames({chevron: true, up: true, grow: true, active: review.user_vote === 1});

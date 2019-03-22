@@ -130,11 +130,11 @@ class ReviewForm extends React.Component {
     const sliderProps = {
       defaultValue: 1,
       min: 1,
-      max: 10,
+      max: 5,
       marks: {
         1: {label: 'Strongly\nDisagree'},
-        5: {label: 'Neutral'},
-        10: {label: 'Strongly\nAgree'}
+        3: {label: 'Neutral'},
+        5: {label: 'Strongly\nAgree'}
       }
     };
     const {newReview} = this.props;
