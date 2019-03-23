@@ -64,9 +64,9 @@ class ReviewCard extends React.Component {
     }
 
     const icon = (
-      <span class="fa-stack fa-lg award-container">
-        <i className={classNames(awardColor, 'award', 'fas fa-trophy', 'fa-stack-2x')} />
-        <i className="fa fa-stack-1x award-label">{awardColor[0].toUpperCase()}</i>
+      <span class="award-container">
+        <span className="award-label">{awardColor[0].toUpperCase()}</span>
+        <i className={classNames(awardColor, 'award', 'fas fa-trophy')} />
       </span>
     );
     return (

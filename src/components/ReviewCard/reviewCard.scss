@@ -43,11 +43,17 @@
       }
       .award-container {
         margin-left: 0.5em;
+        position: relative;
         .award-label {
           font-family: sans-serif;
+          position: absolute;
+          left: 35%;
+          bottom: 33%;
           color: white;
+          font-size: 0.75em;
         }
         .award {
+          font-size: 1.5em;
           &.gold {
             color: $gold;
           }
