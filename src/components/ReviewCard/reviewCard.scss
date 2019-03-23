@@ -41,17 +41,22 @@
       &:first-child {
         font-weight: 600;
       }
-
-      .award {
+      .award-container {
         margin-left: 0.5em;
-        &.gold {
-          color: $gold;
+        .award-label {
+          font-family: sans-serif;
+          color: white;
         }
-        &.silver {
-          color: $silver;
-        }
-        &.bronze {
-          color: $bronze;
+        .award {
+          &.gold {
+            color: $gold;
+          }
+          &.silver {
+            color: $silver;
+          }
+          &.bronze {
+            color: $bronze;
+          }
         }
       }
 

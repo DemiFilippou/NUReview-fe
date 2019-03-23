@@ -63,10 +63,16 @@ class ReviewCard extends React.Component {
         minUpvotes = 10;
     }
 
+    const icon = (
+      <span class="fa-stack fa-lg award-container">
+        <i className={classNames(awardColor, 'award', 'fas fa-trophy', 'fa-stack-2x')} />
+        <i className="fa fa-stack-1x award-label">{awardColor[0].toUpperCase()}</i>
+      </span>
+    );
     return (
       <Popup
         className="award-popup"
-        trigger={<i className={classNames(awardColor, 'award', 'fas fa-trophy')} />}
+        trigger={icon}
         position="right center"
         on={['hover', 'click', 'focus']}
         content={`This user has ${minUpvotes}+ total upvotes on their reviews`}
