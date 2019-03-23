@@ -3,7 +3,7 @@ import './reviewCard.scss';
 import classNames from 'classnames';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import {Label, Icon} from 'semantic-ui-react';
+import {Label, Icon, Popup} from 'semantic-ui-react';
 
 class ReviewCard extends React.Component {
   constructor(props) {
@@ -42,6 +42,39 @@ class ReviewCard extends React.Component {
     );
   }
 
+  renderAward = () => {
+    const userUpvotes = this.props.review.user.total_upvotes;
+
+    // lowest reward requires 10 upvotes
+    if (userUpvotes < 10) return;
+
+    let awardColor, minUpvotes;
+    switch (true) {
+      case userUpvotes >= 50:
+        awardColor = 'gold';
+        minUpvotes = 50;
+        break;
+      case userUpvotes >= 20:
+        awardColor = 'silver';
+        minUpvotes = 20;
+        break;
+      default:
+        awardColor = 'bronze';
+        minUpvotes = 10;
+    }
+
+    return (
+      <Popup
+        className="award-popup"
+        trigger={<i className={classNames(awardColor, 'award', 'fas fa-trophy')} />}
+        position="right center"
+        on={['hover', 'click', 'focus']}
+        content={`This user has ${minUpvotes}+ total upvotes on their reviews`}
+        inverted
+      />
+    );
+  };
+
   render() {
     const {review} = this.props;
     const sliderProps = {
@@ -68,7 +101,11 @@ class ReviewCard extends React.Component {
             <span> {`${review.semester} ${review.year}`}</span>
           </div>
           <div className="row">
-            <span> {review.anonymous ? '' : review.user && review.user.name}</span>
+            <span>
+              {' '}
+              {review.anonymous ? 'Anonymous' : review.user && review.user.name}
+              {this.renderAward()}
+            </span>
             <span>{wageText}</span>
           </div>
         </div>

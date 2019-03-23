@@ -41,6 +41,23 @@
       &:first-child {
         font-weight: 600;
       }
+
+      .award {
+        margin-left: 0.5em;
+        &.gold {
+          color: $gold;
+        }
+        &.silver {
+          color: $silver;
+        }
+        &.bronze {
+          color: $bronze;
+        }
+      }
+
+      .award-popup {
+        background-color: $gray;
+      }
     }
   }
 
