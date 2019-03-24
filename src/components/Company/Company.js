@@ -2,6 +2,7 @@ import React from 'react';
 import './company.scss';
 import ReviewCardContainer from '../ReviewCard';
 import ReviewFormContainer from '../ReviewForm';
+import PositionFilterContainer from './PositionFilter';
 import NoMatch from '../NoMatch';
 import {Message, Loader, Dimmer} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
@@ -11,14 +12,19 @@ class Company extends React.Component {
     super(props);
     this.id = this.props.match.params.id;
     this.handleMessageDismiss = this.handleMessageDismiss.bind(this);
-    this.state = {isLoading: true, loadingStart: Date.now()};
+    this.state = {isLoading: true, loadingStart: Date.now(), newReviews: 0};
   }
 
   componentDidMount() {
     this.props.getCompany(this.id);
+    this.props.getPositions();
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.company.reviews !== this.props.company.reviews) {
+      this.setState({newReviews: this.state.newReviews + 1});
+    }
+
     if (this.props.successMessage && !prevProps.successMessage) {
       this.props.getCompany(this.id);
     }
@@ -79,17 +85,28 @@ class Company extends React.Component {
             </Message>
           )}
           <header className="company-header">
-            <button className="unstyled-btn back-btn">
-              <Link to="/" className="unstyled-link">
-                <i className="far fa-arrow-alt-circle-left" />
-              </Link>
-            </button>
-            <h1 className="company-name">{`Reading reviews for ${name}`}</h1>
-            {this.renderReviewForm()}
+            <div className="row">
+              <button className="unstyled-btn back-btn">
+                <Link to="/" className="unstyled-link">
+                  <i className="far fa-arrow-alt-circle-left" />
+                </Link>
+              </button>
+              <h1 className="company-name">{`Reading reviews for ${name}`}</h1>
+              {this.renderReviewForm()}
+            </div>
+            <div className="filter-container row">
+              <PositionFilterContainer />
+            </div>
           </header>
           <div className="company-reviews">
             {reviews && reviews.length
-              ? reviews.map((review) => <ReviewCardContainer review={review} key={review.id} />)
+              ? reviews.map((review) => (
+                  <ReviewCardContainer
+                    review={review}
+                    key={review.id + this.state.newReviews}
+                    newReviews={this.state.newReviews}
+                  />
+                ))
               : this.renderNoReviewsMsg(name)}
           </div>
         </div>

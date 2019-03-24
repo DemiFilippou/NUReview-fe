@@ -8,6 +8,7 @@ import {
   SET_COMPANY_CHOSEN,
   GET_COMPANY_BEGIN,
   GET_COMPANY_SUCCESS,
+  GET_REVIEWS_SUCCESS,
   GET_COMPANY_FAIL,
   GET_POSITIONS_SUCCESS,
   GET_TAGS_SUCCESS,
@@ -87,6 +88,8 @@ const nuReviewReducer = (state = initialState, action) => {
         ...state,
         company: {...action.payload, isLoading: false}
       };
+    case GET_REVIEWS_SUCCESS:
+      return {...state, company: {...state.company, reviews: action.payload}};
     case GET_COMPANY_FAIL:
       return {
         ...state,

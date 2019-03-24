@@ -14,6 +14,9 @@ export const SET_COMPANY_CHOSEN = 'SET_COMPANY_CHOSEN';
 export const GET_COMPANY_BEGIN = 'GET_COMPANY_BEGIN';
 export const GET_COMPANY_SUCCESS = 'GET_COMPANY_SUCCESS';
 export const GET_COMPANY_FAIL = 'GET_COMPANY_FAIL';
+export const GET_REVIEWS_BEGIN = 'GET_REVIEWS_BEGIN';
+export const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS';
+export const GET_REVIEWS_FAIL = 'GET_REVIEWS_FAIL';
 export const GET_POSITIONS_BEGIN = 'GET_POSITIONS_BEGIN';
 export const GET_POSITIONS_SUCCESS = 'GET_POSITIONS_SUCCESS';
 export const GET_POSITIONS_FAIL = 'GET_POSITIONS_FAIL';
@@ -165,6 +168,39 @@ export const getCompanySuccess = (company) => ({
 
 export const getCompanyFail = (error) => ({
   type: GET_COMPANY_FAIL,
+  payload: {error}
+});
+
+export const getReviews = (companyId, filters) => {
+  let path = `/companies/${companyId}/reviews`;
+  if (filters.positionId) path += `?position_id=${filters.positionId}`;
+
+  return (dispatch) => {
+    dispatch(getReviewsBegin(companyId, filters));
+    api
+      .get(path)
+      .then((res) => {
+        dispatch(getReviewsSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(getReviewsFail(err));
+      });
+  };
+};
+
+export const getReviewsBegin = (companyId, filters) => ({
+  type: GET_REVIEWS_BEGIN,
+  companyId,
+  filters
+});
+
+export const getReviewsSuccess = (reviews) => ({
+  type: GET_REVIEWS_SUCCESS,
+  payload: reviews
+});
+
+export const getReviewsFail = (error) => ({
+  type: GET_REVIEWS_FAIL,
   payload: {error}
 });
 

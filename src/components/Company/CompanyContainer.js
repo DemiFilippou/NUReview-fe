@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Company from './Company';
-import {getCompany, setSuccessMessage} from '../../actions';
+import {getCompany, getPositions, setSuccessMessage} from '../../actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({getCompany, setSuccessMessage}, dispatch);
+  return bindActionCreators({getCompany, setSuccessMessage, getPositions}, dispatch);
 };
 
 const CompanyContainer = connect(
