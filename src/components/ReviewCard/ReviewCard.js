@@ -75,7 +75,7 @@ class ReviewCard extends React.Component {
         trigger={icon}
         position="right center"
         on={['hover', 'click', 'focus']}
-        content={`This user has ${minUpvotes}+ total upvotes on their reviews`}
+        content={`This user has ${minUpvotes}+ total upvotes on reviews they've written`}
         inverted
       />
     );
@@ -107,8 +107,7 @@ class ReviewCard extends React.Component {
             <span> {`${review.semester} ${review.year}`}</span>
           </div>
           <div className="row">
-            <span>
-              {' '}
+            <span className="user-name">
               {review.anonymous ? 'Anonymous' : review.user && review.user.name}
               {this.renderAward()}
             </span>

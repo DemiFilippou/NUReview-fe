@@ -41,33 +41,33 @@
       &:first-child {
         font-weight: 600;
       }
-      .award-container {
-        margin-left: 0.5em;
-        position: relative;
-        .award-label {
-          font-family: sans-serif;
-          position: absolute;
-          left: 35%;
-          bottom: 33%;
-          color: white;
-          font-size: 0.75em;
+      .user-name {
+        display: flex;
+        margin-top: 0.25em;
+        .award-container {
+          margin-left: 0.5em;
+          position: relative;
+          .award-label {
+            font-family: sans-serif;
+            position: absolute;
+            left: 35%;
+            bottom: 33%;
+            color: white;
+            font-size: 0.75em;
+          }
+          .award {
+            font-size: 1.5em;
+            &.gold {
+              color: $gold;
+            }
+            &.silver {
+              color: $silver;
+            }
+            &.bronze {
+              color: $bronze;
+            }
+          }
         }
-        .award {
-          font-size: 1.5em;
-          &.gold {
-            color: $gold;
-          }
-          &.silver {
-            color: $silver;
-          }
-          &.bronze {
-            color: $bronze;
-          }
-        }
-      }
-
-      .award-popup {
-        background-color: $gray;
       }
     }
   }
