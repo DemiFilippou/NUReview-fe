@@ -12,7 +12,7 @@ class Company extends React.Component {
     super(props);
     this.id = this.props.match.params.id;
     this.handleMessageDismiss = this.handleMessageDismiss.bind(this);
-    this.state = {isLoading: true, loadingStart: Date.now(), newReviews: 0};
+    this.state = {isLoading: true, loadingStart: Date.now(), lastUpdated: Date.now()};
   }
 
   componentDidMount() {
@@ -21,8 +21,8 @@ class Company extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.company.reviews !== this.props.company.reviews) {
-      this.setState({newReviews: this.state.newReviews + 1});
+    if (prevProps.filters !== this.props.filters) {
+      this.setState({lastUpdated: Date.now()});
     }
 
     if (this.props.successMessage && !prevProps.successMessage) {
@@ -85,7 +85,7 @@ class Company extends React.Component {
             </Message>
           )}
           <header className="company-header">
-            <div className="row">
+            <div className="row company-details">
               <button className="unstyled-btn back-btn">
                 <Link to="/" className="unstyled-link">
                   <i className="far fa-arrow-alt-circle-left" />
@@ -95,17 +95,14 @@ class Company extends React.Component {
               {this.renderReviewForm()}
             </div>
             <div className="filter-container row">
+              <label>Filter Job Title:</label>
               <PositionFilterContainer />
             </div>
           </header>
           <div className="company-reviews">
             {reviews && reviews.length
               ? reviews.map((review) => (
-                  <ReviewCardContainer
-                    review={review}
-                    key={review.id + this.state.newReviews}
-                    newReviews={this.state.newReviews}
-                  />
+                  <ReviewCardContainer review={review} key={review.id + this.state.lastUpdated} />
                 ))
               : this.renderNoReviewsMsg(name)}
           </div>

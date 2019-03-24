@@ -6,7 +6,7 @@ import {addPosition, enterPosition, getReviews} from '../../actions';
 
 class PositionFilter extends Component {
   handleChange = (e, {value}) => {
-    this.props.filterReviews(this.props.companyId, {positionId: value, companyId: this.props.companyId});
+    this.props.filterReviews(this.props.companyId, {positionId: value});
   };
 
   render() {
@@ -20,11 +20,12 @@ class PositionFilter extends Component {
       <Dropdown
         clearable
         options={positions}
-        placeholder="Choose Job Title"
+        placeholder="All Titles"
         search
         selection
         fluid
         onChange={this.handleChange}
+        className="position-filter"
       />
     );
   }

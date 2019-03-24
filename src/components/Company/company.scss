@@ -17,10 +17,28 @@
     .company-header {
       .row {
         display: flex;
-        justify-content: space-between;
-        padding-top: 1.25em;
         padding-left: 0.5em;
         padding-right: 0.5em;
+
+        &.company-details {
+          justify-content: space-between;
+          padding-top: 1.25em;
+        }
+
+        &.filter-container {
+          justify-content: flex-end;
+          align-items: center;
+          padding-top: 0.25em;
+
+          label {
+            font-weight: bold;
+          }
+
+          .dropdown.position-filter {
+            width: 25%;
+            margin-left: 1em;
+          }
+        }
       }
 
       button {

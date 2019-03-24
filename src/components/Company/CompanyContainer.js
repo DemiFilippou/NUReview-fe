@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
     company: state.nuReview.company,
     successMessage: state.nuReview.successMessage,
     error: state.error.getCompany,
-    isLoading: state.nuReview.company.isLoading
+    isLoading: state.nuReview.company.isLoading,
+    filters: state.nuReview.filters
   };
 };
 
