@@ -46,15 +46,15 @@ class ReviewCard extends React.Component {
     const userUpvotes = this.props.review.user.total_upvotes;
 
     // lowest reward requires 10 upvotes
-    if (userUpvotes < 10) return;
+    if (userUpvotes < 4) return;
 
     let awardColor, minUpvotes;
     switch (true) {
-      case userUpvotes >= 50:
+      case userUpvotes >= 8:
         awardColor = 'gold';
         minUpvotes = 50;
         break;
-      case userUpvotes >= 20:
+      case userUpvotes >= 6:
         awardColor = 'silver';
         minUpvotes = 20;
         break;
